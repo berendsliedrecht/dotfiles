@@ -1,0 +1,22 @@
+{
+  "rust-analyzer.inlayHints.enable": false,
+  "suggest.autoTrigger": "none",
+  "suggest.floatEnable": false,
+  "diagnostic.messageTarget": "echo",
+  "signature.target": "echo",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "javascript",
+    "typescript",
+    "json",
+    "typescriptreact",
+    "javascriptreact",
+    "rust"
+  ],
+  "prettier.semi": false,
+  "prettier.printWidth": 120,
+  "prettier.trailingComma": "es5",
+  "eslint.codeActionsOnSave.mode": "problems",
+  "eslint.autoFixOnSave": true
+}
