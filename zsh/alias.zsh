@@ -19,7 +19,11 @@ alias doom="~/.emacs.d/bin/doom"
 alias v="vim"
 alias nv="nvim"
 alias c="code ."
-alias als="nvim ~/.config/zsh/alias.zsh"
+alias als="vim ~/.config/zsh/alias.zsh"
 
 # Sourcing
 alias szsh="source ~/.zshrc"
+
+# Change default
+alias ls="ls --color=auto"
+alias patch-dir="patch -s -p0 <"
