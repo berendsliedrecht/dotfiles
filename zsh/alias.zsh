@@ -27,3 +27,6 @@ alias szsh="source ~/.zshrc"
 # Change default
 alias ls="ls --color=auto"
 alias patch-dir="patch -s -p0 <"
+
+# Configuration
+alias rebuild="make && sudo make install"

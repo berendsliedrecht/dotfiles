@@ -1,0 +1,14 @@
+#!/bin/sh
+
+BAT0="$(cat /sys/class/power_supply/BAT0/capacity)"
+BAT1="$(cat /sys/class/power_supply/BAT1/capacity)"
+DATE="$(date '+%m-%d-%Y - %H:%M')"
+
+MESSAGE="[${BAT0}% ${BAT1}%] ${DATE}"
+
+while xsetroot -name "${MESSAGE}"
+do
+	sleep 60
+done &
+
+exec dwm
