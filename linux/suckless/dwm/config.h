@@ -68,6 +68,7 @@ static const char *brightdowncmd[] = {"xbacklight", "-dec", "10", NULL};
 static const char *volupcmd[] = {"amixer", "-q", "sset", "Master" ,"5%+", NULL};
 static const char *voldowncmd[] = {"amixer", "-q", "sset", "Master" ,"5%-", NULL};
 static const char *volmutetogglecmd[] = {"amixer", "-q", "sset", "Master", "toggle", NULL};
+static const char *mutemictogglecmd[] = {"amixer", "set", "Capture", "toggle", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -109,6 +110,7 @@ static Key keys[] = {
         { 0,                            XF86XK_AudioRaiseVolume,   spawn,            {.v = volupcmd } },
         { 0,                            XF86XK_AudioLowerVolume,   spawn,            {.v = voldowncmd } },
         { 0,                            XF86XK_AudioMute,          spawn,            {.v = volmutetogglecmd } },
+        { 0,                            XF86XK_AudioMicMute,       spawn,            {.v = mutemictogglecmd} },
 };
 
 /* button definitions */

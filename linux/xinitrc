@@ -2,16 +2,25 @@
 
 while true
 do
-	VOL="$(amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }')"
+	MUTED="$(amixer get Master | grep 'Left:' | awk '{ print ($6) }')"
+
+	if [ "$MUTED" = "[off]" ]
+	then
+		VOL="MUTED"
+	else
+		VOL="$(amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }')"
+	fi
+
 	BRIGHT="$(xbacklight | cut -f1 -d'.')"
 	BAT0="$(cat /sys/class/power_supply/BAT0/capacity)"
 	BAT1="$(cat /sys/class/power_supply/BAT1/capacity)"
 	DATE="$(date '+%m-%d-%Y - %H:%M')"
+	MIC="$(amixer get Capture | grep 'Left:' | awk '{print ($6)}' | sed 's/[][]//g' | tr a-z A-Z )"
 
-	MESSAGE="[V: ${VOL}%] [B: ${BRIGHT}%] [0: ${BAT0}% 1: ${BAT1}%] ${DATE}"
+	MESSAGE="[M: ${MIC}] [V: ${VOL}] [B: ${BRIGHT}%] [0: ${BAT0}% 1: ${BAT1}%] ${DATE}"
 
 	xsetroot -name "${MESSAGE}"
-	sleep 60
+	sleep 1
 done &
 
 exec dwm
