@@ -1,13 +1,16 @@
 #!/bin/sh
 
-BAT0="$(cat /sys/class/power_supply/BAT0/capacity)"
-BAT1="$(cat /sys/class/power_supply/BAT1/capacity)"
-DATE="$(date '+%m-%d-%Y - %H:%M')"
-
-MESSAGE="[${BAT0}% ${BAT1}%] ${DATE}"
-
-while xsetroot -name "${MESSAGE}"
+while true
 do
+	VOL="$(amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }')"
+	BRIGHT="$(xbacklight | cut -f1 -d'.')"
+	BAT0="$(cat /sys/class/power_supply/BAT0/capacity)"
+	BAT1="$(cat /sys/class/power_supply/BAT1/capacity)"
+	DATE="$(date '+%m-%d-%Y - %H:%M')"
+
+	MESSAGE="[V: ${VOL}%] [B: ${BRIGHT}%] [0: ${BAT0}% 1: ${BAT1}%] ${DATE}"
+
+	xsetroot -name "${MESSAGE}"
 	sleep 60
 done &
 
