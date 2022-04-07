@@ -1,30 +1,29 @@
 #!/bin/sh
 
+xset r rate 220 30
+setxkbmap -option ctrl:nocaps
+ 
 while true
 do
-	MUTED="$(amixer get Master | grep 'Left:' | awk '{ print ($6) }')"
+	MUTED="$(amixer get Master | grep 'Mono:' | awk '{ print ($6) }')"
 
-	if [ "$MUTED" = "[off]" ]
-	then
-		VOL="MUTED"
-	else
-		VOL="$(amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }')"
-	fi
+	 if [ "$MUTED" = "[off]" ]
+	 then
+	 	VOL="MUTED"
+	 else
+	 	VOL="$(amixer get Master | grep 'Mono:' | awk '{ print ($4) }' | sed 's/[][]//g' )"
+	 fi
 
 	BRIGHT="$(xbacklight | cut -f1 -d'.')"
 	BAT0="$(cat /sys/class/power_supply/BAT0/capacity)"
 	BAT1="$(cat /sys/class/power_supply/BAT1/capacity)"
 	DATE="$(date '+%m-%d-%Y - %H:%M')"
-	MIC="$(amixer get Capture | grep 'Left:' | awk '{print ($6)}' | sed 's/[][]//g' | tr a-z A-Z )"
+	MIC="$(amixer get Capture | grep 'Left:' | awk '{ print ($7) }' | sed 's/[][]//g' | tr a-z A-Z )"
 
 	MESSAGE="[M: ${MIC}] [V: ${VOL}] [B: ${BRIGHT}%] [0: ${BAT0}% 1: ${BAT1}%] ${DATE}"
 
 	xsetroot -name "${MESSAGE}"
 	sleep 1
 done &
-
-# wut
-export _JAVA_AWT_WM_NONREPARENTING=1
-
 
 exec dwm
