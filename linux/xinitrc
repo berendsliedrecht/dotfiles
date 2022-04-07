@@ -23,4 +23,8 @@ do
 	sleep 1
 done &
 
+# wut
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+
 exec dwm

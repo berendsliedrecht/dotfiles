@@ -1,4 +1,4 @@
-DEV="~/Developer/"
+DEV="~/Developer"
 TMP="${DEV}/tmp"
 WORK="${DEV}/work"
 PERSONAL="${DEV}/personal"
