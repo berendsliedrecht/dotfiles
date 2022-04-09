@@ -1,3 +1,6 @@
+export EDITOR="nvim"
+
+
 export PATH="/tmp/fnm_multishells/53851_1649500039667/bin":$PATH
 export FNM_MULTISHELL_PATH="/tmp/fnm_multishells/53851_1649500039667"
 export FNM_VERSION_FILE_STRATEGY="local"
