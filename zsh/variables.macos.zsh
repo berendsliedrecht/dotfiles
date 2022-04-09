@@ -1,5 +1,3 @@
-export NODE_BINARY=~/.config/noot/using/node
-
 export ANDROID_SDK_ROOT=~/Android/Sdk
 
 export PATH="/tmp/fnm_multishells/53851_1649500039667/bin":$PATH
