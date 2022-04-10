@@ -1,20 +1,34 @@
 #!/bin/sh
 
-systemctl --user import-environment DISPLAY
+# Android Studio fixup
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 xset r rate 220 30
 setxkbmap -option ctrl:nocaps
  
 while true
 do
-	MUTED="$(amixer get Master | grep 'Mono:' | awk '{ print ($6) }')"
+	BAT0PREFIX="0"
+	BAT0CHARGING="$(cat /sys/class/power_supply/BAT0/status)"
+	if [ "$BAT0CHARGING" == "Charging" ]
+	then
+		BAT0PREFIX="C"
+	fi
 
-	 if [ "$MUTED" = "[off]" ]
-	 then
-	 	VOL="MUTED"
-	 else
-	 	VOL="$(amixer get Master | grep 'Mono:' | awk '{ print ($4) }' | sed 's/[][]//g' )"
-	 fi
+	BAT1PREFIX="1"
+	BAT1CHARGING="$(cat /sys/class/power_supply/BAT1/status)"
+	if [ "$BAT1CHARGING" == "Charging" ]
+	then
+		BAT1PREFIX="C"
+	fi
+
+	MUTED="$(amixer get Master | grep 'Mono:' | awk '{ print ($6) }')"
+	if [ "$MUTED" = "[off]" ]
+	then
+		VOL="MUTED"
+	else
+		VOL="$(amixer get Master | grep 'Mono:' | awk '{ print ($4) }' | sed 's/[][]//g' )"
+	fi
 
 	BRIGHT="$(xbacklight | cut -f1 -d'.')"
 	BAT0="$(cat /sys/class/power_supply/BAT0/capacity)"
@@ -22,10 +36,10 @@ do
 	DATE="$(date '+%m-%d-%Y - %H:%M')"
 	MIC="$(amixer get Capture | grep 'Left:' | awk '{ print ($7) }' | sed 's/[][]//g' | tr a-z A-Z )"
 
-	MESSAGE="[M: ${MIC}] [V: ${VOL}] [B: ${BRIGHT}%] [0: ${BAT0}% 1: ${BAT1}%] ${DATE}"
+	MESSAGE="[M: ${MIC}] [V: ${VOL}] [B: ${BRIGHT}%] [${BAT0PREFIX}: ${BAT0}% ${BAT1PREFIX}: ${BAT1}%] [${DATE}]"
 
 	xsetroot -name "${MESSAGE}"
-	sleep 1
+	sleep 60
 done &
 
 exec dwm
