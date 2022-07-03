@@ -1,0 +1,23 @@
+# Load yabai
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+# Use bsp
+yabai -m config layout bsp
+
+# Disable some apps
+black_list='"System Preferences" "Clockify Desktop" "Finder" "Simulator"'
+
+for item in $black_list; do
+  yabai -m rule --add app=$item manage=off
+done
+
+# Padding
+yabai -m config top_padding    10
+yabai -m config bottom_padding 10
+yabai -m config left_padding   15
+yabai -m config right_padding  15
+yabai -m config window_gap     15
+
+# Focus mouse
+yabai -m config focus_follows_mouse autoraise

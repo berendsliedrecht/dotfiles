@@ -1,2 +1,2 @@
 export EDITOR="nvim"
-export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"

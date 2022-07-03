@@ -18,3 +18,15 @@ Google
 Around
 Bitwarden
 mimeapps.list
+agent-cli/
+bin/mkcd
+bin/open_iterm
+bin/qhttp
+bin/qts
+bin/trash
+binwalk/
+configstore/
+emacs/
+flipper/
+ncspot/
+vodo/

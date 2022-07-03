@@ -6,4 +6,5 @@ return require("packer").startup(function()
 	use({ "kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" } })
 	use({ "jose-elias-alvarez/buftabline.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
   use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+  use { "junegunn/goyo.vim" }
 end)

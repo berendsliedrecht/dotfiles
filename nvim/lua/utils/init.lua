@@ -20,9 +20,18 @@ function imap(shortcut, command)
 	map("i", shortcut, command)
 end
 
+function tmap(shortcut, command)
+	map("t", shortcut, command)
+end
+
 function lnmap(shortcut, command)
 	shortcut = "<leader>" .. shortcut
 	map("n", shortcut, command)
+end
+
+function ltmap(shortcut, command)
+	shortcut = "<leader>" .. shortcut
+	map("t", shortcut, command)
 end
 
 function vvar(var, value)
@@ -30,7 +39,6 @@ function vvar(var, value)
 end
 
 function opt(key, value)
-	value = value or true
 	vim.o[key] = value
 end
 

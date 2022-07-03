@@ -2,21 +2,6 @@ require("utils")
 
 lnmap("o", ":NvimTreeToggle<CR>")
 
-vim.g.nvim_tree_highlight_opened_files = 1
-vim.g.nvim_tree_width_allow_resize = 1
-
-vim.g.nvim_tree_show_icons = {
-	git = 1,
-	folders = 1,
-	files = 1,
-}
-
-vim.g.nvim_tree_icons = {
-	git = {
-		untracked = "U",
-	},
-}
-
 require("nvim-tree").setup({
 	filters = {
 		dotfiles = true,
@@ -28,7 +13,27 @@ require("nvim-tree").setup({
 	},
 	view = {
 		width = 25,
-		auto_resize = true,
 		signcolumn = "yes",
 	},
+  actions = {
+    open_file = {
+      resize_window = true,
+    },
+  },
+  renderer = {
+    highlight_opened_files = "icon",
+    icons = {
+      glyphs = {
+        git = {
+          untracked = "U",
+        },
+      },
+      show = {
+        git = true,
+        folder = true,
+        file = true,
+        folder_arrow = false,
+      },
+    },
+  }
 })

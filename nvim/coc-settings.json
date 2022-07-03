@@ -2,7 +2,6 @@
   "rust-analyzer.inlayHints.enable": false,
   "suggest.autoTrigger": "none",
   "suggest.floatEnable": false,
-  "diagnostic.messageTarget": "echo",
   "signature.target": "echo",
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
@@ -12,8 +11,13 @@
     "json",
     "typescriptreact",
     "javascriptreact",
-    "rust"
+    "rust",
+    "html",
+    "toml",
+    "yaml",
+    "yml"
   ],
+  "rust-analyzer.checkOnSave.command": "clippy",
   "prettier.semi": false,
   "prettier.printWidth": 120,
   "prettier.trailingComma": "es5",

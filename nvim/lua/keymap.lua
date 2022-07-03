@@ -15,3 +15,11 @@ nmap("qa", ":qall<CR>")
 
 -- quit current buffer
 lnmap("q", ":bd<CR>")
+
+-- Goyo focus mode
+lnmap("g", ":Goyo<CR>")
+
+-- Goto terminal mode
+lnmap("t", ":vs | term<CR>")
+
+tmap("<ESC>", "<C-\\><C-n>")

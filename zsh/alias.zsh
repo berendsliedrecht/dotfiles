@@ -6,6 +6,7 @@ PERSONAL="$DEV/personal"
 ANIMO="$WORK/animo"
 HYPERLEDGER="$WORK/hyperledger"
 ESSIF="$WORK/essif"
+IDCRYPT="$WORK/idcrypt"
 
 # Directories
 alias tmp="cd $TMP"
@@ -15,6 +16,7 @@ alias animo="cd $ANIMO"
 alias hype="cd $HYPERLEDGER"
 alias esf="cd $ESSIF"
 alias conf="cd $CONFIG"
+alias idc="cd $IDCRYPT"
 
 # Editting
 alias v="vim"
@@ -28,6 +30,9 @@ alias szsh="source ~/.zshrc"
 # Change default
 alias ls="ls --color=auto"
 alias patch-dir="patch -s -p0 <"
+alias rg="rg -S."
 
 # Configuration
 alias rebuild="make && sudo make install"
+
+alias ngrok-demo="ngrok http --region=eu --hostname=gbs.eu.ngrok.io 3001"
