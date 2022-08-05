@@ -2,22 +2,27 @@
 sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
+# External spacebar
+yabai -m config external_bar all:25:0
+
 # Use bsp
 yabai -m config layout bsp
 
 # Disable some apps
-black_list='"System Preferences" "Clockify Desktop" "Finder" "Simulator"'
-
-for item in $black_list; do
-  yabai -m rule --add app=$item manage=off
-done
+yabai -m rule --add app="Finder" manage=off
+yabai -m rule --add app="System Preferences" manage=off
+yabai -m rule --add app="Clockify" manage=off
+yabai -m rule --add app="Simulator" manage=off
 
 # Padding
-yabai -m config top_padding    10
-yabai -m config bottom_padding 10
-yabai -m config left_padding   15
-yabai -m config right_padding  15
-yabai -m config window_gap     15
+yabai -m config top_padding    5
+yabai -m config bottom_padding 5
+yabai -m config left_padding   5
+yabai -m config right_padding  5
+yabai -m config window_gap     5
 
 # Focus mouse
 yabai -m config focus_follows_mouse autoraise
+
+# No shadow
+yabai -m config window_shadow off

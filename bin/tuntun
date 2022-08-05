@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+ssh -R $1.tunnel.animo.id:80:$2 localhost.run
+

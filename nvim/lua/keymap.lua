@@ -19,7 +19,11 @@ lnmap("q", ":bd<CR>")
 -- Goyo focus mode
 lnmap("g", ":Goyo<CR>")
 
+-- Open projects finder
+lnmap("p", ":Telescope projects<CR>")
+
 -- Goto terminal mode
 lnmap("t", ":vs | term<CR>")
 
+-- Goto normal mode in terminal
 tmap("<ESC>", "<C-\\><C-n>")

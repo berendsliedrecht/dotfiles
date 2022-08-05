@@ -3,6 +3,12 @@ require("utils")
 lnmap("o", ":NvimTreeToggle<CR>")
 
 require("nvim-tree").setup({
+  respect_buf_cwd = true,
+  update_cwd = true,
+  update_focused_file = {
+    enable = true,
+    update_cwd = true
+  },
 	filters = {
 		dotfiles = true,
 		custom = { ".git", "node_modules", ".cache", ".bin" },

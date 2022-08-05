@@ -15,7 +15,8 @@
     "html",
     "toml",
     "yaml",
-    "yml"
+    "yml",
+    "python"
   ],
   "rust-analyzer.checkOnSave.command": "clippy",
   "prettier.semi": false,
