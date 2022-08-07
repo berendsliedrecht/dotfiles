@@ -16,14 +16,14 @@ nmap("qa", ":qall<CR>")
 -- quit current buffer
 lnmap("q", ":bd<CR>")
 
--- Goyo focus mode
-lnmap("g", ":Goyo<CR>")
-
--- Open projects finder
-lnmap("p", ":Telescope projects<CR>")
-
 -- Goto terminal mode
 lnmap("t", ":vs | term<CR>")
 
 -- Goto normal mode in terminal
 tmap("<ESC>", "<C-\\><C-n>")
+
+-- LSP utils
+lnmap("d", "vim.diagnostic.goto_next")
+lnmap("e", "vim.diagnostic.open_float")
+lnmap("d", "vim.diagnostic.goto_prev")
+lnmap("w", "vim.diagnostic.setloclist")

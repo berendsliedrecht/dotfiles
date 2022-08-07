@@ -1,5 +1,0 @@
-to path:
-
-```sh
-git apply <FILE.DIFF>
-```

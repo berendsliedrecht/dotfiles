@@ -24,4 +24,6 @@ alt - l : yabai -m window --resize right:30:0 ; yabai -m window --resize left:30
 
 alt - space : yabai -m window --focus next || yabai -m window --focus first
 
-shift + alt - w : yabai -m window --warp west
+# rotate tree
+shift + cmd - h : yabai -m space --mirror y-axis
+shift + cmd - j : yabai -m space --mirror x-axis
