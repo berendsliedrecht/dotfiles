@@ -5,3 +5,4 @@
 !spacebar/**
 !nvim/**
 !bin/**
+!emacs/**/*.el

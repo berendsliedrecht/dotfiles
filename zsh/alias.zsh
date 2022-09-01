@@ -21,7 +21,7 @@ alias idc="cd $IDCRYPT"
 # Editting
 alias v="vim"
 alias nv="nvim"
-alias c="code ."
+alias c="codium ."
 alias als="vim ~/.config/zsh/alias.zsh"
 
 # Sourcing
