@@ -9,3 +9,6 @@
 (load-file (locate-user-emacs-file "general.el"))
 (load-file (locate-user-emacs-file "key-bindings.el"))
 (load-file (locate-user-emacs-file "theme.el"))
+
+;; Evil keybindings
+(load-file (locate-user-emacs-file "evil.el"))
