@@ -1,3 +1,7 @@
+;; Used for evil-collection
+(setq evil-want-integration t)
+(setq evil-want-keybinding nil)
+
 (use-package evil)
 (require 'evil)
 

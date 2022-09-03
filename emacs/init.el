@@ -22,6 +22,7 @@
 
 ;; --- Plugins ---
 (load-file (locate-user-emacs-file "evil.el"))
+(load-file (locate-user-emacs-file "evil-collection.el"))
 (load-file (locate-user-emacs-file "ivy.el"))
 (load-file (locate-user-emacs-file "counsel.el"))
 (load-file (locate-user-emacs-file "projectile.el"))
