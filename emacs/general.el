@@ -43,5 +43,5 @@
 ;; Listen to file changes for Dired
 (setq global-auto-rever-non-file-buffers t)
 
-;; Set backup to special directory
-(setq backup-directory-alist `(("." . "~/.emacs_backups")))
+;; No backups
+(setq make-backup-files nil)
