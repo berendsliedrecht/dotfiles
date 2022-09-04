@@ -2,7 +2,8 @@ require("utils")
 
 local telescope = require("telescope")
 
-lnmap("<leader>", ":Telescope git_files<CR>")
+lnmap("<leader>", ":lua require('telescope.builtin').git_files({show_untracked=true})<CR>")
+lnmap("n", ":lua require('telescope.builtin').git_files({show_untracked=true, cwd='$HOME/vimwiki/'})<CR>")
 lnmap("/", ":Telescope live_grep<CR>")
 lnmap("b", ":Telescope buffers<CR>")
 

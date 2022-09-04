@@ -1,6 +1,7 @@
 return require("packer").startup(function()
   -- General
 	use({ "wbthomason/packer.nvim" })
+	use({ "vimwiki/vimwiki" })
 
   -- Editting
 	use({ "nvim-telescope/telescope.nvim" })

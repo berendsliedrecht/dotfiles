@@ -7,6 +7,7 @@ ANIMO="$WORK/animo"
 HYPERLEDGER="$WORK/hyperledger"
 ESSIF="$WORK/essif"
 IDCRYPT="$WORK/idcrypt"
+NOTEBOOK="$HOME/Notebook"
 
 # Directories
 alias tmp="cd $TMP"
@@ -17,6 +18,7 @@ alias hype="cd $HYPERLEDGER"
 alias esf="cd $ESSIF"
 alias conf="cd $CONFIG"
 alias idc="cd $IDCRYPT"
+alias notes="cd $NOTEBOOK"
 
 # Editting
 alias v="vim"
