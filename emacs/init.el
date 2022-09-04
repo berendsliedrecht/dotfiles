@@ -28,7 +28,6 @@
 (load-file (locate-user-emacs-file "projectile.el"))
 (load-file (locate-user-emacs-file "lsp.el"))
 (load-file (locate-user-emacs-file "rg.el"))
-(load-file (locate-user-emacs-file "typescript.el"))
 (load-file (locate-user-emacs-file "magit.el"))
 (load-file (locate-user-emacs-file "neotree.el"))
 (load-file (locate-user-emacs-file "prettier.el"))
