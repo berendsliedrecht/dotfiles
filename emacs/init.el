@@ -30,3 +30,4 @@
 (load-file (locate-user-emacs-file "rg.el"))
 (load-file (locate-user-emacs-file "typescript.el"))
 (load-file (locate-user-emacs-file "magit.el"))
+(load-file (locate-user-emacs-file "neotree.el"))

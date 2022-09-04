@@ -34,4 +34,11 @@
 ;; Ripgrep through project
 (evil-define-key 'normal 'global (kbd "<leader> /") 'projectile-ripgrep)
 
+;; Eslint fix all
 (evil-define-key 'normal 'global (kbd "<leader> ]") 'lsp-eslint-apply-all-fixes)
+
+;; Open magit
+(evil-define-key 'normal 'global (kbd "<leader> m") 'magit)
+
+;; Open neotree
+(evil-define-key 'normal 'global (kbd "<leader> o") 'neotree-toggle)
