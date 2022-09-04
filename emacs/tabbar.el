@@ -33,14 +33,16 @@
 		    :foreground 'unspecified
 		    :box nil)
 
-;; active tab in current window
+;; active tab
 (set-face-attribute 'tab-line-tab-current nil
 		    :background 'unspecified
-		    :foreground "#00FFFF"
+		    :foreground "#FF00FF"
 		    :box nil)
 
+;; Underline on cursor focus
 (set-face-attribute 'tab-line-highlight nil
 		    :background 'unspecified
 		    :foreground 'unspecified
 		    :underline t
 		    :box nil)
+

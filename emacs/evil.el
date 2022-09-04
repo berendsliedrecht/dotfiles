@@ -32,8 +32,11 @@
 ;; find project
 (evil-define-key 'normal 'global (kbd "<leader> p") 'projectile-switch-project)
 
-;; find project
+;; List buffers
 (evil-define-key 'normal 'global (kbd "<leader> k") 'projectile-kill-buffers)
+
+;; Kill all buffers
+(evil-define-key 'normal 'global (kbd "<leader> b") 'ivy-switch-buffer)
 
 ;; Ripgrep through project
 (evil-define-key 'normal 'global (kbd "<leader> /") 'projectile-ripgrep)
