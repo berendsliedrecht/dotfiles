@@ -5,6 +5,7 @@
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
   :config
+  (evil-set-undo-system 'undo-redo)
   (evil-mode))
 
 ;; Set leader to space
@@ -39,6 +40,9 @@
 
 ;; Eslint fix all
 (evil-define-key 'normal 'global (kbd "<leader> ]") 'lsp-eslint-apply-all-fixes)
+
+;; Run prettier
+(evil-define-key 'normal 'global (kbd "<leader> [") 'prettier-prettify)
 
 ;; Lsp code action
 (evil-define-key 'normal 'global (kbd "<leader> a") 'lsp-execute-code-action)

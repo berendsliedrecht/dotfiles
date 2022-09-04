@@ -17,6 +17,9 @@
 ;; Generic keybindings
 (load-file (locate-user-emacs-file "key-bindings.el"))
 
+;; Tabbar
+(load-file (locate-user-emacs-file "tabbar.el"))
+
 ;; --- Plugins ---
 (load-file (locate-user-emacs-file "evil.el"))
 (load-file (locate-user-emacs-file "evil-collection.el"))
@@ -28,3 +31,5 @@
 (load-file (locate-user-emacs-file "typescript.el"))
 (load-file (locate-user-emacs-file "magit.el"))
 (load-file (locate-user-emacs-file "neotree.el"))
+(load-file (locate-user-emacs-file "prettier.el"))
+(load-file (locate-user-emacs-file "which-key.el"))

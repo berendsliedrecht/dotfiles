@@ -51,3 +51,9 @@
 
 ;; Disable lock files
 (setq create-lockfiles nil)
+
+;; Scroll down by 1 line
+(setq scroll-step 1)
+
+;; Always keep minimum of 7 lines below
+(setq scroll-margin 7)
