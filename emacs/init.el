@@ -17,9 +17,6 @@
 ;; Generic keybindings
 (load-file (locate-user-emacs-file "key-bindings.el"))
 
-;; Load theme
-(load-file (locate-user-emacs-file "theme.el"))
-
 ;; --- Plugins ---
 (load-file (locate-user-emacs-file "evil.el"))
 (load-file (locate-user-emacs-file "evil-collection.el"))

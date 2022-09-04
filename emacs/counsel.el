@@ -1,2 +1,2 @@
-(use-package counsel)
-(require 'counsel)
+(use-package counsel
+  :ensure t)

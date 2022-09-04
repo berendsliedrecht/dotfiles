@@ -1,11 +1,11 @@
-;; Used for evil-collection
-(setq evil-want-integration t)
-(setq evil-want-keybinding nil)
-
-(use-package evil)
-(require 'evil)
-
-(evil-mode 1)
+(use-package evil
+  :ensure t
+  :init
+  ;; Used for evil-collection
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode))
 
 ;; Set leader to space
 (evil-set-leader 'normal (kbd "SPC"))

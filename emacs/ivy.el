@@ -1,4 +1,4 @@
-(use-package ivy)
-(require 'ivy)
-
-(ivy-mode +1)
+(use-package ivy
+  :ensure t
+  :config
+  (ivy-mode))

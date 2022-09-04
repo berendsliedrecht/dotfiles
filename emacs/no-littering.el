@@ -1,2 +1,2 @@
-(use-package no-littering)
-(require 'no-littering)
+(use-package no-littering
+  :ensure t)

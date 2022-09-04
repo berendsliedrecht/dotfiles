@@ -1,6 +1,9 @@
 ;; No GUI prompts
 (setq use-dialog-box nil)
 
+;; Disable the mode line
+(setq-default mode-line-format nil)
+
 ;; Remove startup message
 (setq inhibit-startup-message t)
 

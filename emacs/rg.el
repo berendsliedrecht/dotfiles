@@ -1,2 +1,2 @@
-(use-package rg)
-(require 'rg)
+(use-package rg
+  :ensure t)

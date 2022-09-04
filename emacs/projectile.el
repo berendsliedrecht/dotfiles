@@ -1,7 +1,9 @@
-(use-package projectile)
-(require 'projectile)
-(projectile-global-mode)
-(setq projectile-enable-caching t)
-(setq projectile-sort-order 'recently-active)
+(use-package projectile
+  :ensure t
+  :init
+  (setq projectile-enable-caching t)
+  (setq projectile-sort-order 'recently-active)
+  (add-hook 'projectile-after-switch-project-hook 'neotree-projectile-action)
+  :config
+  (projectile-global-mode))
 
-(add-hook 'projectile-after-switch-project-hook 'neotree-projectile-action)
