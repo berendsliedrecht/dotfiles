@@ -31,11 +31,17 @@
 ;; find project
 (evil-define-key 'normal 'global (kbd "<leader> p") 'projectile-switch-project)
 
+;; find project
+(evil-define-key 'normal 'global (kbd "<leader> k") 'projectile-kill-buffers)
+
 ;; Ripgrep through project
 (evil-define-key 'normal 'global (kbd "<leader> /") 'projectile-ripgrep)
 
 ;; Eslint fix all
 (evil-define-key 'normal 'global (kbd "<leader> ]") 'lsp-eslint-apply-all-fixes)
+
+;; Lsp code action
+(evil-define-key 'normal 'global (kbd "<leader> a") 'lsp-execute-code-action)
 
 ;; Open magit
 (evil-define-key 'normal 'global (kbd "<leader> m") 'magit)
