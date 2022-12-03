@@ -1,5 +1,7 @@
 *
 !*/
+!linux/**
+!zsh/**
 !yabai/**
 !skhd/**
 !spacebar/**
