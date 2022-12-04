@@ -1,7 +1,5 @@
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-setxkbmap -option ctrl:nocaps
-xset r rate 200 25
 status_bar &
 dunst &
 exec dwm
