@@ -2,9 +2,7 @@ require("utils")
 
 vim.g.do_filetype_lua = true
 vim.g.mapleader = " "
-
---vim.cmd("hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE")
---vim.cmd("hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE")
+vim.cmd("colorscheme koehler")
 
 local function status_line()
   local mode = "%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}"

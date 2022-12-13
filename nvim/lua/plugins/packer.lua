@@ -5,7 +5,7 @@ return require("packer").startup(function()
   -- Editting
 	use({ "nvim-telescope/telescope.nvim" })
 	use({ "nvim-lua/plenary.nvim" })
-	use({ "kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" } })
+	use({ "nvim-tree/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons",  } })
 	use({ "jose-elias-alvarez/buftabline.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
