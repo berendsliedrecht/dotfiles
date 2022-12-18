@@ -1,4 +1,5 @@
 DEV="$HOME/Developer"
+CONTAINERS="$DEV/containers"
 CONFIG="$HOME/.config"
 TMP="$DEV/tmp"
 WORK="$DEV/work"
@@ -38,3 +39,6 @@ alias rg="rg -S."
 alias rebuild="make && sudo make install"
 
 alias ngrok-demo="ngrok http --region=eu --hostname=gbs.eu.ngrok.io 3001"
+
+# containers
+alias lima-ubuntu="limactl shell ubuntu"

@@ -16,6 +16,9 @@ nmap("qa", ":qall<CR>")
 -- quit current buffer
 lnmap("q", ":bd<CR>")
 
+-- Open index notes
+lnmap("N", ":e $HOME/vimwiki/index.wiki<CR>")
+
 -- Goto terminal mode
 lnmap("t", ":vs | term<CR>")
 
@@ -23,7 +26,6 @@ lnmap("t", ":vs | term<CR>")
 tmap("<ESC>", "<C-\\><C-n>")
 
 -- LSP utils
--- TODO: no clue why we cant use lnmap here
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '<leader>d', vim.diagnostic.goto_prev, opts)

@@ -8,4 +8,4 @@
 !spacebar/**
 !nvim/**
 !bin/**
-!emacs/*.el
+!doom/**

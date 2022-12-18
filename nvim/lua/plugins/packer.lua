@@ -2,6 +2,9 @@ return require("packer").startup(function()
   -- General
 	use({ "wbthomason/packer.nvim" })
 
+  -- Theme
+  use({ "shaunsingh/oxocarbon.nvim", run = './install.sh' })
+
   -- Editting
 	use({ "nvim-telescope/telescope.nvim" })
 	use({ "nvim-lua/plenary.nvim" })

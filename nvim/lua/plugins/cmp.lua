@@ -22,12 +22,19 @@ cmp.setup({
        completion = cmp.config.window.bordered(),
        documentation = cmp.config.window.bordered(),
   },
+  completion = {
+    autocomplete = false
+  },
   settings = {
     json = {
       schemas = {
         {
           fileMatch = { 'package.json' },
           url = 'https://json.schemastore.org/package.json',
+        },
+        {
+          fileMatch = { 'eslintrc.json' },
+          url = 'https://json.schemastore.org/eslintrc.json',
         },
       },
     }
