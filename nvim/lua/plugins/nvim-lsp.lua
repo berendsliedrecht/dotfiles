@@ -1,5 +1,21 @@
 vim.diagnostic.config({virtual_text = false})
 
+local border = {
+      {"╭", "FloatBorder"},
+      {"─", "FloatBorder"},
+      {"╮", "FloatBorder"},
+      {"│", "FloatBorder"},
+      {"╯", "FloatBorder"},
+      {"─", "FloatBorder"},
+      {"╰", "FloatBorder"},
+      {"│", "FloatBorder"},
+}
+
+local handlers =  {
+  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
+}
+
 local on_attach = function(client, bufnr)
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
@@ -29,6 +45,7 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
     on_attach = on_attach,
     flags = lsp_flags,
+    handlers = handlers,
     settings = {
       yaml = {
         schemas = {
@@ -42,22 +59,18 @@ for _, lsp in ipairs(servers) do
             url = 'https://json.schemastore.org/package.json',
           },
           {
-            description = 'TypeScript compiler configuration file',
             fileMatch = {'tsconfig.json', 'tsconfig.*.json'},
             url = 'http://json.schemastore.org/tsconfig'
           },
           {
-            description = 'ESLint config',
             fileMatch = {'.eslintrc.json', '.eslintrc'},
             url = 'http://json.schemastore.org/eslintrc'
           },
           {
-            description = 'Prettier config',
             fileMatch = {'.prettierrc', '.prettierrc.json', 'prettier.config.json'},
             url = 'http://json.schemastore.org/prettierrc'
           },
           {
-            description = 'Babel configuration',
             fileMatch = {'.babelrc.json', '.babelrc', 'babel.config.json'},
             url = 'http://json.schemastore.org/lerna'
           },

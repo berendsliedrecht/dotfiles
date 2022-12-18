@@ -26,6 +26,12 @@ cmp.setup({
     autocomplete = false
   },
   settings = {
+    yaml = {
+      schemas = {
+        fileMatch = { '.github/**/*.yml', '.github/**/*.yaml' },
+        url = "https://json.schemastore.org/github-workflow.json",
+      }
+    },
     json = {
       schemas = {
         {
@@ -33,10 +39,22 @@ cmp.setup({
           url = 'https://json.schemastore.org/package.json',
         },
         {
-          fileMatch = { 'eslintrc.json' },
-          url = 'https://json.schemastore.org/eslintrc.json',
+          fileMatch = {'tsconfig.json', 'tsconfig.*.json'},
+          url = 'http://json.schemastore.org/tsconfig'
         },
-      },
+        {
+          fileMatch = {'.eslintrc.json', '.eslintrc'},
+          url = 'http://json.schemastore.org/eslintrc'
+        },
+        {
+          fileMatch = {'.prettierrc', '.prettierrc.json', 'prettier.config.json'},
+          url = 'http://json.schemastore.org/prettierrc'
+        },
+        {
+          fileMatch = {'.babelrc.json', '.babelrc', 'babel.config.json'},
+          url = 'http://json.schemastore.org/lerna'
+        },
+      }
     }
   }
 })

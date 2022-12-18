@@ -4,6 +4,10 @@ vim.g.do_filetype_lua = true
 vim.g.mapleader = " "
 vim.cmd("colorscheme koehler")
 
+vim.cmd("hi Pmenu ctermfg=NONE ctermbg=NONE cterm=NONE")
+vim.cmd("hi PmenuSel ctermfg=NONE ctermbg=NONE cterm=NONE")
+vim.cmd("hi TabLineSel ctermfg=black ctermbg=darkgrey cterm=NONE")
+
 local function status_line()
   local mode = "%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}"
   local right_align = "%="

@@ -1,5 +1,5 @@
 require("buftabline").setup({
-	icon_colors = false,
+  icon_colors = false,
 	tab_format = " #{i} #{b}#{f} ",
 	flags = {
 		modified = " *",
