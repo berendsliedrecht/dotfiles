@@ -2,9 +2,6 @@ return require("packer").startup(function()
   -- General
 	use({ "wbthomason/packer.nvim" })
 
-  -- Theme
-  use({ "shaunsingh/oxocarbon.nvim", run = './install.sh' })
-
   -- Editting
 	use({ "nvim-telescope/telescope.nvim" })
 	use({ "nvim-lua/plenary.nvim" })
@@ -17,6 +14,9 @@ return require("packer").startup(function()
   use({ "hrsh7th/nvim-cmp" })
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use({ "prettier/vim-prettier", run = "yarn install --frozen-lockfile --production" })
+
+  -- git
+  use({ 'pwntester/octo.nvim', requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' } })
 
   -- completion
   use({ "hrsh7th/cmp-nvim-lsp" })
