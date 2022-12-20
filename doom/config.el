@@ -1,44 +1,65 @@
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+
 (setq user-full-name "Berend Sliedrecht" user-mail-address "blu3beri@proton.me")
 
-(setq doom-theme 'doom-henna)
+(setq doom-theme 'doom-old-hope)
+(setq doom-font (font-spec :family "Hack Nerd Font" :size 14.0))
 
 (setq display-line-numbers-type t)
 
-;; Disable escape docstring warning
-(setq text-quoting-style 'grave)
+(setq org-directory "~/org/")
 
-;; Disable mode line
-(add-hook 'after-change-major-mode-hook #'hide-mode-line-mode)
+(setq scroll-step 1)
 
-;; Remove some fields from the dashboard
-(assoc-delete-all "Jump to bookmark" +doom-dashboard-menu-sections)
-(assoc-delete-all "Open documentation" +doom-dashboard-menu-sections)
+(setq scroll-margin 7)
 
-;; Only navigate with visual lines
-(define-key evil-normal-state-map "j" 'evil-next-visual-line)
-(define-key evil-normal-state-map "k" 'evil-previous-visual-line)
+(after! evil
+  (map! :n "j"   #'evil-next-visual-line)
+  (map! :n "k"   #'evil-previous-visual-line)
+  (map! :n "C-h" #'evil-window-left)
+  (map! :n "C-j" #'evil-window-down)
+  (map! :n "C-k" #'evil-window-up)
+  (map! :n "C-l" #'evil-window-right))
 
-;; Move between windows with C-(h|j|k|l)
-(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+(map! :leader
+      "k" 'magit)
 
-;; lsp stuff
-(setq lsp-headerline-breadcrumb-enable nil)
-(setq lsp-enable-symbol-highlighting nil)
-(setq lsp-completion-show-kind nil)
-(setq lsp-ui-doc-enable nil)
-(setq lsp-ui-doc-show-with-cursor nil)
-(setq lsp-ui-doc-show-with-mouse nil)
-(setq lsp-lens-enable nil)
-(setq lsp-ui-sideline-enable nil)
-(setq lsp-ui-sideline-show-code-actions nil)
-(setq lsp-ui-sideline-enable nil)
-(setq lsp-ui-sideline-show-hover nil)
-(setq lsp-ui-sideline-enable nil)
-(setq lsp-ui-sideline-show-diagnostics nil)
-(setq lsp-completion-show-detail nil)
+(map! :leader
+      :prefix "o"
+      "p" #'neotree-toggle)
 
-;; disable auto completion
-(setq company-idle-delay nil)
+(map! :leader "]" #'lsp-eslint-apply-all-fixes)
+(map! :leader "[" #'prettier-prettify)
+
+(use-package! lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (setq lsp-headerline-breadcrumb-enable nil
+        lsp-enable-symbol-highlighting nil)
+  :hook
+  (typescript-mode . lsp-deferred)
+  (eslint-mode . lsp-deferred)
+  :commands lsp lsp-deferred)
+
+(use-package! lsp-ui
+  :after lsp-mode
+  :commands lsp-ui-mode)
+
+(use-package! company
+  :after lsp-mode
+  :hook
+  (global-company-mode))
+
+(use-package! typescript-mode
+  :after lsp-mode)
+
+(use-package! lsp-ivy
+  :commands lsp-ivy-workspace-symbol)
+
+(use-package! which-key
+  :config
+  (which-key-mode))
+
+(after! neotree
+  (setq neo-theme nil))

@@ -1,1 +1,7 @@
-;; -*- no-byte-compile: t; -*-
+(package! neotree)
+(package! lsp-mode)
+(package! lsp-ui)
+(package! lsp-ivy)
+(package! typescript-mode)
+(package! company-mode)
+(package! prettier)

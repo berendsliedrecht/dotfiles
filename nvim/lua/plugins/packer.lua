@@ -15,9 +15,6 @@ return require("packer").startup(function()
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use({ "prettier/vim-prettier", run = "yarn install --frozen-lockfile --production" })
 
-  -- git
-  use({ 'pwntester/octo.nvim', requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' } })
-
   -- completion
   use({ "hrsh7th/cmp-nvim-lsp" })
   use({ "saadparwaiz1/cmp_luasnip" })
