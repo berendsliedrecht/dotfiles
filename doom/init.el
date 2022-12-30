@@ -6,6 +6,7 @@
        :ui
        doom
        doom-dashboard
+       doom-modeline
        hl-todo
        (popup +defaults)
        vi-tilde-fringe

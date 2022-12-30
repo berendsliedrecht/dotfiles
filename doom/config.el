@@ -30,15 +30,23 @@
 
 (map! :leader "]" #'lsp-eslint-apply-all-fixes)
 (map! :leader "[" #'prettier-prettify)
+(map! :map lsp-ui-mode-map :n "K" #'lsp-ui-doc-glance)
+(map! :leader :n "e")
 
 (use-package! lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
   :config
   (setq lsp-headerline-breadcrumb-enable nil
-        lsp-enable-symbol-highlighting nil)
+        lsp-ui-doc-show-with-mouse nil
+        lsp-ui-doc-show-with-cursor nil
+        lsp-enable-symbol-highlighting nil
+        lsp-ui-sideline-enable nil
+        lsp-lens-enable nil)
+
   :hook
   (typescript-mode . lsp-deferred)
+  (rust-mode . lsp-deferred)
   (eslint-mode . lsp-deferred)
   :commands lsp lsp-deferred)
 
@@ -60,6 +68,10 @@
 (use-package! which-key
   :config
   (which-key-mode))
+
+(use-package! flycheck
+  :config
+  (setq flycheck-display-errors-delay nil))
 
 (after! neotree
   (setq neo-theme nil))
