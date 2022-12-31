@@ -1,6 +1,7 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-(setq user-full-name "Berend Sliedrecht" user-mail-address "blu3beri@proton.me")
+(setq user-full-name "Berend Sliedrecht"
+      user-mail-address "blu3beri@proton.me")
 
 (setq my/light-theme 'doom-one
       my/dark-theme 'doom-old-hope)
@@ -14,7 +15,7 @@
 
 (add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
 (setq doom-theme my/dark-theme)
-(setq doom-font (font-spec :family "Hack Nerd Font" :size 16.0))
+(setq doom-font (font-spec :family "Hack Nerd Font" :size 14.0))
 
 (setq display-line-numbers-type t)
 
@@ -45,7 +46,8 @@
       :n "C-l" #'evil-window-right)
 
 (map! :leader
-      "k" 'magit)
+      "k" 'magit
+      "t" #'+vterm/toggle)
 
 (map! :leader
       :prefix "o"
@@ -59,9 +61,12 @@
       "a" #'lsp-execute-code-action)
 
 (map! :after lsp-mode
-      "C-SPC" #'company-complete
-      :map lsp-ui-mode-map
-      "K" #'lsp-ui-doc-glance)
+      "C-SPC" #'company-complete)
+
+(map! :after lsp-ui
+      :map lsp-ui-doc-mode-map
+      :n "K" #'lsp-ui-doc-glance
+      :n "C-K" #'lsp-ui-doc-focus-frame)
 
 (use-package! lsp-mode
   :init
