@@ -1,4 +1,3 @@
-#+BEGIN_SRC emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 (setq user-full-name "Berend Sliedrecht"
@@ -121,4 +120,3 @@
 
 (after! neotree
   (setq neo-theme nil))
-#+END_SRC
