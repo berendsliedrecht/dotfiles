@@ -2,7 +2,8 @@
 
 (map! :leader
       :prefix "o"
-      "x" 'split-and-browse)
+      "x" #'split-and-browse
+      "p" #'neotree-toggle)
 
 (map! :after evil
       :n "j"   #'evil-next-visual-line
@@ -15,10 +16,6 @@
 (map! :leader
       "k" 'magit
       "t" #'+vterm/toggle)
-
-(map! :leader
-      :prefix "o"
-      "p" #'neotree-toggle)
 
 (map! :after lsp-mode
       :leader
