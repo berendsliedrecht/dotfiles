@@ -11,6 +11,8 @@
       scroll-step 1
       scroll-margin 7)
 
+(global-hide-mode-line-mode)
+
 (defun my/apply-theme (appearance)
   "Load theme, taking current system APPEARANCE into consideration."
   (mapc #'disable-theme custom-enabled-themes)
@@ -19,17 +21,19 @@
     ('dark (load-theme my/dark-theme t))))
 
 (add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
+
 (setq doom-theme my/dark-theme)
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 14.0))
-
 
 (defun split-and-browse ()
   "Vertically split window and browse url"
   (interactive)
+  (if (string-match-p "xwidget" system-configuration-options)
   (let (url)
     (setq url (read-string "Enter url: "))
     (+evil/window-vsplit-and-follow)
-    (xwidget-webkit-browse-url url t)))
+    (xwidget-webkit-browse-url url t))
+  (message "No xwidget support")))
 
 (map! :leader
       :prefix "o"
@@ -51,7 +55,8 @@
       :prefix "o"
       "p" #'neotree-toggle)
 
-(map! :leader
+(map! :after lsp-mode
+      :leader
       :mode lsp-mode
       "]" #'lsp-eslint-apply-all-fixes
       "[" #'prettier-prettify
