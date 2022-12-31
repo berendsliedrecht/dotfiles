@@ -3,7 +3,9 @@
 (setq user-full-name "Berend Sliedrecht" user-mail-address "blu3beri@proton.me")
 
 (setq doom-theme 'doom-old-hope)
-(setq doom-font (font-spec :family "Hack Nerd Font" :size 14.0))
+(setq doom-font (font-spec :family "Hack Nerd Font" :size 16.0))
+
+;;(global-hide-mode-line-mode)
 
 (setq display-line-numbers-type t)
 
@@ -13,13 +15,23 @@
 
 (setq scroll-margin 7)
 
+(defun split-and-browse ()
+  "Vertically split window and browse url"
+  (interactive)
+  (let (url)
+    (setq url (read-string "Enter url: "))
+    (+evil/window-vsplit-and-follow)
+    (xwidget-webkit-browse-url url)))
+
+(map! :leader :prefix "o" "x" 'split-and-browse)
+
 (after! evil
   (map! :n "j"   #'evil-next-visual-line)
-  (map! :n "k"   #'evil-previous-visual-line)
-  (map! :n "C-h" #'evil-window-left)
-  (map! :n "C-j" #'evil-window-down)
-  (map! :n "C-k" #'evil-window-up)
-  (map! :n "C-l" #'evil-window-right))
+        :n "k"   #'evil-previous-visual-line
+        :n "C-h" #'evil-window-left
+        :n "C-j" #'evil-window-down
+        :n "C-k" #'evil-window-up
+        :n "C-l" #'evil-window-right)
 
 (map! :leader
       "k" 'magit)

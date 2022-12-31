@@ -29,7 +29,7 @@
        tty
 
        :lang
-       emacs-lisp
+       (emacs-lisp +lsp)
 
        :config
        (default +bindings +smartparens))

@@ -7,3 +7,4 @@
 (package! rust-mode)
 (package! prettier)
 (package! flycheck)
+(package! rust-mode)
