@@ -1,7 +1,5 @@
 ;;; $DOOMDIR/+misc.el -*- lexical-binding: t; -*-
 
-(setq magit-commit-signoff t)
-
 (defun split-and-browse ()
   "Vertically split window and browse url"
   (interactive)
