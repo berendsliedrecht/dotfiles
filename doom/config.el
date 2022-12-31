@@ -6,6 +6,11 @@
 (setq my/light-theme 'doom-one
       my/dark-theme 'doom-old-hope)
 
+(setq display-line-numbers-type t
+      org-directory "~/org/"
+      scroll-step 1
+      scroll-margin 7)
+
 (defun my/apply-theme (appearance)
   "Load theme, taking current system APPEARANCE into consideration."
   (mapc #'disable-theme custom-enabled-themes)
@@ -17,13 +22,6 @@
 (setq doom-theme my/dark-theme)
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 14.0))
 
-(setq display-line-numbers-type t)
-
-(setq org-directory "~/org/")
-
-(setq scroll-step 1)
-
-(setq scroll-margin 7)
 
 (defun split-and-browse ()
   "Vertically split window and browse url"
@@ -117,4 +115,3 @@
 
 (after! neotree
   (setq neo-theme nil))
-
