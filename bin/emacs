@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title emacs
+# @raycast.mode silent
+
+# Optional parameters:
+# @raycast.icon /opt/homebrew/opt/emacs-plus@28/Emacs.app/Contents/Resources/Emacs.icns
+
+# Documentation:
+# @raycast.description Start emacs client
+# @raycast.author blu3beri
+
+emacsclient -nc -a "emacs"
