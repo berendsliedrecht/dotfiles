@@ -31,4 +31,5 @@
        (emacs-lisp +lsp)
 
        :config
+       literate
        (default +bindings +smartparens))

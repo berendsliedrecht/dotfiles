@@ -1,9 +1,10 @@
+#+BEGIN_SRC emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 (setq user-full-name "Berend Sliedrecht"
       user-mail-address "blu3beri@proton.me")
 
-(setq my/light-theme 'doom-one
+(setq my/light-theme 'doom-one-light
       my/dark-theme 'doom-old-hope)
 
 (setq display-line-numbers-type t
@@ -120,3 +121,4 @@
 
 (after! neotree
   (setq neo-theme nil))
+#+END_SRC
