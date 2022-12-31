@@ -2,7 +2,18 @@
 
 (setq user-full-name "Berend Sliedrecht" user-mail-address "blu3beri@proton.me")
 
-(setq doom-theme 'doom-old-hope)
+(setq my/light-theme 'doom-one
+      my/dark-theme 'doom-old-hope)
+
+(defun my/apply-theme (appearance)
+  "Load theme, taking current system APPEARANCE into consideration."
+  (mapc #'disable-theme custom-enabled-themes)
+  (pcase appearance
+    ('light (load-theme my/light-theme t))
+    ('dark (load-theme my/dark-theme t))))
+
+(add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
+(setq doom-theme my/dark-theme)
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 16.0))
 
 (setq display-line-numbers-type t)
