@@ -5,8 +5,6 @@
 (setq doom-theme 'doom-old-hope)
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 16.0))
 
-;;(global-hide-mode-line-mode)
-
 (setq display-line-numbers-type t)
 
 (setq org-directory "~/org/")
@@ -21,17 +19,19 @@
   (let (url)
     (setq url (read-string "Enter url: "))
     (+evil/window-vsplit-and-follow)
-    (xwidget-webkit-browse-url url)))
+    (xwidget-webkit-browse-url url t)))
 
-(map! :leader :prefix "o" "x" 'split-and-browse)
+(map! :leader
+      :prefix "o"
+      "x" 'split-and-browse)
 
-(after! evil
-  (map! :n "j"   #'evil-next-visual-line)
-        :n "k"   #'evil-previous-visual-line
-        :n "C-h" #'evil-window-left
-        :n "C-j" #'evil-window-down
-        :n "C-k" #'evil-window-up
-        :n "C-l" #'evil-window-right)
+(map! :after evil
+      :n "j"   #'evil-next-visual-line
+      :n "k"   #'evil-previous-visual-line
+      :n "C-h" #'evil-window-left
+      :n "C-j" #'evil-window-down
+      :n "C-k" #'evil-window-up
+      :n "C-l" #'evil-window-right)
 
 (map! :leader
       "k" 'magit)
@@ -40,10 +40,17 @@
       :prefix "o"
       "p" #'neotree-toggle)
 
-(map! :leader "]" #'lsp-eslint-apply-all-fixes)
-(map! :leader "[" #'prettier-prettify)
-(map! :map lsp-ui-mode-map :n "K" #'lsp-ui-doc-glance)
-(map! :leader :n "e")
+(map! :leader
+      :mode lsp-mode
+      "]" #'lsp-eslint-apply-all-fixes
+      "[" #'prettier-prettify
+      "e" #'flycheck-display-error-at-point
+      "a" #'lsp-execute-code-action)
+
+(map! :after lsp-mode
+      "C-SPC" #'company-complete
+      :map lsp-ui-mode-map
+      "K" #'lsp-ui-doc-glance)
 
 (use-package! lsp-mode
   :init
@@ -54,8 +61,11 @@
         lsp-ui-doc-show-with-cursor nil
         lsp-enable-symbol-highlighting nil
         lsp-ui-sideline-enable nil
+        lsp-modeline-code-actions-enable nil
+        lsp-eldoc-enable-hover nil
+        lsp-signature-auto-activate nil
+        lsp-modeline-diagnostics-enable nil
         lsp-lens-enable nil)
-
   :hook
   (typescript-mode . lsp-deferred)
   (rust-mode . lsp-deferred)
@@ -69,7 +79,9 @@
 (use-package! company
   :after lsp-mode
   :hook
-  (global-company-mode))
+  (global-company-mode)
+  :config
+  (setq company-idle-delay nil))
 
 (use-package! typescript-mode
   :after lsp-mode)
@@ -83,7 +95,10 @@
 
 (use-package! flycheck
   :config
-  (setq flycheck-display-errors-delay nil))
+  (setq flycheck-display-errors-delay 5
+        flycheck-idle-buffer-switch-delay 5
+        flycheck-idle-change-delay 5))
 
 (after! neotree
   (setq neo-theme nil))
+
