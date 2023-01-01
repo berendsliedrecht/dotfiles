@@ -3,6 +3,7 @@
 (map! :leader
       :prefix "o"
       "x" #'split-and-browse
+      "g" #'split-and-query-google
       "p" #'neotree-toggle)
 
 (map! :after evil
