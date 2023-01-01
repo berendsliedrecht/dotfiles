@@ -29,6 +29,7 @@
 
        :lang
        (emacs-lisp +lsp)
+       org
 
        :config
        (default +bindings +smartparens))

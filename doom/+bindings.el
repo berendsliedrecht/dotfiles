@@ -6,12 +6,16 @@
       "p" #'neotree-toggle)
 
 (map! :after evil
-      :n "j"   #'evil-next-visual-line
-      :n "k"   #'evil-previous-visual-line
-      :n "C-h" #'evil-window-left
-      :n "C-j" #'evil-window-down
-      :n "C-k" #'evil-window-up
-      :n "C-l" #'evil-window-right)
+      :n "j"     #'evil-next-visual-line
+      :n "k"     #'evil-previous-visual-line
+      :n "C-h"   #'evil-window-left
+      :n "C-j"   #'evil-window-down
+      :n "C-k"   #'evil-window-up
+      :n "C-l"   #'evil-window-right
+      :n "C-s-h" #'shrink-window-horizontally
+      :n "C-s-j" #'enlarge-window
+      :n "C-s-k" #'shrink-window
+      :n "C-s-l" #'enlarge-window-horizontally)
 
 (map! :leader
       "k" 'magit
