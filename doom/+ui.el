@@ -5,6 +5,9 @@
 
 (global-hide-mode-line-mode)
 
+;; Ignore buffers that start with the *
+(setq ivy-ignore-buffers '("\\` " "\\`\\*"))
+
 (defun my/apply-theme (appearance)
   "Load theme, taking current system APPEARANCE into consideration."
   (mapc #'disable-theme custom-enabled-themes)

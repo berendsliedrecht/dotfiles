@@ -21,7 +21,7 @@
 
        :tools
        (eval +overlay)
-       magit
+       (magit +forge)
 
        :os
        (:if IS-MAC macos)

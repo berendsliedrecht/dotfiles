@@ -13,7 +13,7 @@
   "Wrapper function to split window and follow"
   (+evil/window-vsplit-and-follow))
 
-(defun split-and-browse (url)
+(defun split-and-browse ()
   "Vertically split window and browse url"
   (interactive)
   (if (my/support-xwidget-p)
