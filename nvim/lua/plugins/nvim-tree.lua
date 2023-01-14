@@ -13,6 +13,7 @@ require("nvim-tree").setup({
 	},
 	view = {
     adaptive_size = true,
+    cursorline = false,
 	},
   renderer = {
     icons = {

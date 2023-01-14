@@ -3,7 +3,7 @@
 require("settings")
 require("keymap")
 require("plugins/packer")
-require("plugins/buftabline")
+-- require("plugins/buftabline")
 require("plugins/prettier")
 require("plugins/cmp")
 require("plugins/nvim-lsp")

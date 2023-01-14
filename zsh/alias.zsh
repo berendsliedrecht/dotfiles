@@ -33,11 +33,11 @@ alias szsh="source ~/.zshrc"
 # Change default
 alias ls="ls --color=auto"
 alias patch-dir="patch -s -p0 <"
-alias rg="rg -S."
+# alias rg="rg -S."
 
 # Configuration
 alias rebuild="make && sudo make install"
-
+alias vrc="vim ~/.vimrc"
 alias ngrok-demo="ngrok http --region=eu --hostname=gbs.eu.ngrok.io 3001"
 
 # containers

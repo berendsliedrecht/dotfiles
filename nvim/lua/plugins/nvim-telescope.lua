@@ -2,12 +2,16 @@ require("utils")
 
 local telescope = require("telescope")
 
-lnmap("<leader>", ":lua require('telescope.builtin').git_files({show_untracked=true})<CR>")
-lnmap("n", ":lua require('telescope.builtin').git_files({show_untracked=true, cwd='$HOME/vimwiki/'})<CR>")
-lnmap("/", ":Telescope live_grep<CR>")
-lnmap("b", ":Telescope buffers<CR>")
+lnmap("<leader>", ":lua require('telescope.builtin').git_files(require('telescope.themes').get_ivy({}))<CR>")
+lnmap("/", ":lua require('telescope.builtin').live_grep(require('telescope.themes').get_ivy({}))<CR>")
+lnmap("b", ":lua require('telescope.builtin').buffers(require('telescope.themes').get_ivy({}))<CR>")
 
 telescope.setup({
+  pickers = {
+    git_files = {
+      show_untracked = true
+    },
+  },
 	extensions = {
 		fzf = {
 			fuzzy = true,

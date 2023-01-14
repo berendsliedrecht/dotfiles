@@ -6,3 +6,4 @@ export DOCKER_HOST="unix:///var/run/docker.sock"
 export VOLTA_HOME="$HOME/.volta"
 export NODE_BINARY="$(volta which node)"
 export XDG_CONFIG_HOME="$HOME/.config"
+export FZF_DEFAULT_OPTS='--color=bw'

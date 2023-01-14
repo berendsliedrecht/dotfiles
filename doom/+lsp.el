@@ -17,7 +17,9 @@
   :hook
   (typescript-mode . lsp-deferred)
   (rust-mode . lsp-deferred)
+  (yaml-mode . lsp-deferred)
   (eslint-mode . lsp-deferred)
+  (lsp-mode . lsp-enable-which-key-integration)
   :commands lsp lsp-deferred)
 
 (use-package! lsp-ui
@@ -40,6 +42,11 @@
 (use-package! which-key
   :config
   (which-key-mode))
+
+(use-package! android-mode
+  :config
+  (setq android-mode-avd "Resizable_API_33"
+        android-mode-sdk-dir "~/Library/Android/Sdk"))
 
 (use-package! flycheck
   :config

@@ -5,6 +5,7 @@
 (load! "+lsp")
 (load! "+misc")
 (load! "+org")
+(load! "+git")
 
 (setq user-full-name "Berend Sliedrecht"
       user-mail-address "blu3beri@proton.me"

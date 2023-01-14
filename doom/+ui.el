@@ -1,7 +1,9 @@
 ;;; $DOOMDIR/+ui.el -*- lexical-binding: t; -*-
 
-(setq my/light-theme 'doom-one-light
-      my/dark-theme 'doom-old-hope)
+(setq +doom-dashboard-ascii-banner-fn nil)
+
+(setq my/light-theme 'doom-ayu-light
+      my/dark-theme 'doom-ayu-dark)
 
 (global-hide-mode-line-mode)
 
@@ -17,7 +19,7 @@
 
 (add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
 
-(setq doom-theme my/dark-theme)
+(setq doom-theme my/light-theme)
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 14.0))
 
 (after! neotree

@@ -4,6 +4,7 @@
 (package! lsp-ivy)
 (package! typescript-mode)
 (package! company-mode)
+(package! android-mode)
 (package! rust-mode)
 (package! prettier)
 (package! flycheck)

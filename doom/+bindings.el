@@ -6,6 +6,11 @@
       "g" #'split-and-query-google
       "p" #'neotree-toggle)
 
+(map! :leader
+      :prefix "y"
+      "a" #'smerge-keep-current
+      "n" #'smerge-next)
+
 (map! :after evil
       :n "j"     #'evil-next-visual-line
       :n "k"     #'evil-previous-visual-line
