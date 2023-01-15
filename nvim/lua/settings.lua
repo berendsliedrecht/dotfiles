@@ -6,29 +6,11 @@ vim.g.mapleader = " "
 vim.cmd("hi Pmenu ctermfg=NONE ctermbg=NONE cterm=NONE")
 vim.cmd("hi PmenuSel ctermfg=NONE ctermbg=NONE cterm=NONE")
 
---local function status_line()
---  local mode = "%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}"
---  local right_align = "%="
---  local line_no = "%10([%l/%L%)]%"
---  local pct_thru_file = "%5p%%"
---
---  return string.format(
---    "%s%s%s%s",
---    "%=",
---    "[%{%v:lua.string.upper(v:lua.vim.fn.mode())%}]",
---    " ",
---    "[%l]"
---  )
---end
-
 vim.cmd("syntax enable")
 vim.cmd("filetype plugin indent on")
 vim.cmd("set laststatus=0 ruler")
 opt("showmode", false)
 opt("showcmd", false)
---opt("ruler", false)
---opt("laststatus", 3)
---opt("statusline", status_line())
 opt("mouse", "a")
 opt("autoindent", true)
 opt("expandtab", true)
