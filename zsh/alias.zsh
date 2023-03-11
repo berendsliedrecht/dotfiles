@@ -33,7 +33,7 @@ alias szsh="source ~/.zshrc"
 # Change default
 alias ls="ls --color=auto"
 alias patch-dir="patch -s -p0 <"
-# alias rg="rg -S."
+alias rg="rg -S."
 
 # Configuration
 alias rebuild="make && sudo make install"
