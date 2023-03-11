@@ -201,6 +201,7 @@ require("lazy").setup({
       vim.g["prettier#quickfix_enabled"] = 0
       vim.g["prettier#exec_cmd_async"] = 1
       vim.keymap.set("n", "<leader>[", ":PrettierAsync<CR>", key_opts)
+      vim.keymap.set("n", "<leader>]", ":EslintFixAll<CR>", key_opts)
     end
   },
 
@@ -298,4 +299,3 @@ require("lazy").setup({
   }
 }, { install = { colorscheme = { "default" } }})
 
-vim.keymap.set("n", "<leader>]", ":EslintFixAll<CR>", key_opts)
