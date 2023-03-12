@@ -1,5 +1,4 @@
 export _JAVA_AWT_WM_NONREPARENTING=1
-export SUDO_ASKPASS="$HOME/.config/bin/dpass"
 
 ID=$(xinput -list | grep -i "At Translated Set 2 Keyboard" | awk '{ print $7 }' | cut -c 4-)
 setxkbmap -device ${ID} -option ctrl:nocaps
