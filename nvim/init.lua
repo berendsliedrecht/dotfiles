@@ -4,7 +4,6 @@ vim.g.mapleader   = " "
 vim.o.undofile    = true
 vim.o.laststatus  = 3
 vim.o.mouse       = "a"
-vim.o.showcmd     = false
 vim.o.shiftwidth  = 2
 vim.o.shiftround  = true
 vim.o.tabstop     = 2
@@ -28,11 +27,9 @@ vim.o.writebackup = false
 local key_opts = { noremap = true, silent = true } 
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", key_opts )
 vim.keymap.set('n', '<C-t>', ":vs | :term<CR>", key_opts)
-
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, key_opts)
 vim.keymap.set('n', '<leader>w', vim.diagnostic.setloclist, key_opts)
 
--- plugins
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -56,12 +53,14 @@ local servers = {
     settings = {},
   },
   rust = {
+    settingsKey = "rust-analyzer",
     servers = { "rust_analyzer" },
     settings = {}
   },
   yaml = {
     servers = { "yamlls" },
     settings = {
+      keyOrdering = false,
       schemas = {
         {
           fileMatch = { '.github/**/*.yml', '.github/**/*.yaml' },
@@ -106,10 +105,16 @@ require("lazy").setup({
       "hrsh7th/cmp-nvim-lsp"
     },
     config = function() 
-      for _, lsp in pairs(servers) do
+      for k, lsp in pairs(servers) do
         if next(lsp) == nil then break end
+        local settings = {}
+        if lsp.settingsKey then 
+	        settings[lsp.settingsKey] = lsp.settings
+        else 
+	        settings[k] = servers[k].settings
+        end
         for _, server in ipairs(lsp.servers) do
-          require("lspconfig")[server].setup {
+          require("lspconfig")[server].setup({
             capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
             on_attach = function(client, bufnr)
               local bufopts = { noremap=true, silent=true, buffer=bufnr }
@@ -130,8 +135,8 @@ require("lazy").setup({
               ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
               ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" }),
             },
-            settings = schemas,
-          }
+            settings = settings
+          })
         end
       end
     end
@@ -161,12 +166,15 @@ require("lazy").setup({
           { name = "luasnip" },
           { name = "path" },
         },
-          window = {
-            completion = cmp.config.window.bordered(),
-            documentation = cmp.config.window.bordered(),
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
         },
         completion = { autocomplete = false },
-        settings = schemas
+        settings = {
+          yaml = servers.yaml.settings,
+          json = servers.json.settings,
+        }
       })
     end,
   },
@@ -178,8 +186,8 @@ require("lazy").setup({
       local keyset={}
       local n=0
       for k,v in pairs(servers) do
-        n=n+1
-        keyset[n]=k
+        n = n + 1
+        keyset[n] = k
       end
       require("nvim-treesitter.configs").setup({
         ensure_installed = keyset,
@@ -203,37 +211,6 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>[", ":PrettierAsync<CR>", key_opts)
       vim.keymap.set("n", "<leader>]", ":EslintFixAll<CR>", key_opts)
     end
-  },
-
-  {
-    "kyazdani42/nvim-web-devicons",
-    opts = {
-      override = {
-        zsh = {
-          icon = "",
-          color = "#428850",
-          cterm_color = "65",
-          name = "Zsh"
-        }
-      };
-      color_icons = true;
-      default = true;
-      strict = true;
-      override_by_filename = {
-        [".gitignore"] = {
-          icon = "",
-          color = "#f1502f",
-          name = "Gitignore"
-        }
-      };
-      override_by_extension = {
-        ["log"] = {
-          icon = "",
-          color = "#81e043",
-          name = "Log"
-        }
-      }
-    }
   },
 
   {
