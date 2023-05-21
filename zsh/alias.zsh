@@ -38,6 +38,7 @@ alias szsh="source ~/.zshrc"
 alias ls="ls --color=auto"
 alias patch-dir="patch -s -p0 <"
 alias rg="rg -S."
+alias tree="tree --gitignore"
 
 # Configuration
 alias rebuild="make && sudo make install"

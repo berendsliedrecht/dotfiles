@@ -4,7 +4,6 @@ decorations = "Buttonless"
 
 [font]
 normal.family = "Hack Nerd Font Mono"
-size = 18
 
 [colors.primary]
 foreground = "#ffffff"
