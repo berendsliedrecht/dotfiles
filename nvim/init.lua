@@ -30,6 +30,8 @@ vim.keymap.set('n', '<C-t>', ":vs | :term<CR>", key_opts)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, key_opts)
 vim.keymap.set('n', '<leader>w', vim.diagnostic.setloclist, key_opts)
 
+vim.cmd([[autocmd FileType rust nnoremap <buffer> <silent> <leader>[ :silent :!cargo fmt<CR>]])
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -126,7 +128,6 @@ require("lazy").setup({
               vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, bufopts)
               vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
               vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-              vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
             end,
             flags = {
               debounce_text_changes = 150 
@@ -202,16 +203,17 @@ require("lazy").setup({
 
   { 
     "prettier/vim-prettier", 
-    ft = { "typescript", "markdown", "json", "yaml" },
+    ft = { "typescript", "markdown", "json", "yaml", "javascript" },
     config = function() 
       vim.g["prettier#autoformat"] = 0
       vim.g["prettier#autoformat_require_pragma"] = 0
       vim.g["prettier#quickfix_enabled"] = 0
       vim.g["prettier#exec_cmd_async"] = 1
-      vim.keymap.set("n", "<leader>[", ":PrettierAsync<CR>", key_opts)
-      vim.keymap.set("n", "<leader>]", ":EslintFixAll<CR>", key_opts)
+      vim.keymap.set("n", "<leader>[", "<cmd>PrettierAsync<CR>", key_opts)
+      vim.keymap.set("n", "<leader>]", "<cmd>eslintFixAll<CR>", key_opts)
     end
   },
+
 
   {
     "nvim-telescope/telescope.nvim",
@@ -275,4 +277,5 @@ require("lazy").setup({
     end
   }
 }, { install = { colorscheme = { "default" } }})
+
 
