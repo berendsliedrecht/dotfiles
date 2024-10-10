@@ -1,0 +1,25 @@
+# Load yabai
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# set layout to Binary Space Partitioning
+yabai -m config layout bsp
+
+# New window is the main window
+yabai -m config window_placement first_child
+
+# Focus when mouse hovers over a new window
+yabai -m config focus_follows_mouse autofocus
+
+# Disable Shadows
+yabai -m config window_shadow off
+
+# Account for status bar
+yabai -m config external_bar main:20:0
+
+# Set padding
+yabai -m config top_padding    10
+yabai -m config bottom_padding 10
+yabai -m config left_padding   10
+yabai -m config right_padding  10
+yabai -m config window_gap     10

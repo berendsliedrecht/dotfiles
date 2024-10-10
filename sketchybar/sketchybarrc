@@ -1,0 +1,43 @@
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
+
+sketchybar --bar padding_left=0 color=0xff292929 sticky=on
+
+sketchybar --default updates=when_shown                                   \
+                     drawing=on                                           \
+                     icon.color=0xffffffff                                \
+                     label.padding_left=4                                 \
+                     label.padding_right=4                                \
+                     icon.padding_left=4                                  \
+                     icon.padding_right=4
+
+
+for i in "${!SPACE_ICONS[@]}"
+do
+  sid=$(($i+1))
+  sketchybar --add space space.$sid left                                  \
+             --set space.$sid associated_space=$sid                       \
+                              icon=${SPACE_ICONS[i]}                      \
+                              icon.padding_left=10                        \
+                              icon.padding_right=10                       \
+                              background.color=0xff5451FF                 \
+                              background.drawing=off                      \
+                              background.height=27                        \
+                              label.drawing=off                           \
+                              script="$PLUGIN_DIR/space.sh"               \
+                              click_script="yabai -m space --focus $sid"
+done
+
+sketchybar --add item clock right                                         \
+           --set clock   update_freq=1                                    \
+                         script="$PLUGIN_DIR/clock.sh"                    \
+                                                                          \
+           --add item volume right                                        \
+           --set volume  script="$PLUGIN_DIR/volume.sh"                   \
+           --subscribe volume volume_change                               \
+                                                                          \
+           --add item battery right                                       \
+           --set battery script="$PLUGIN_DIR/battery.sh"                  \
+                         update_freq=120                                  \
+                         click_script="$PLUGIN_DIR/sleep.sh"              \
+           --subscribe battery system_woke power_source_change

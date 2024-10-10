@@ -33,15 +33,18 @@ vim.keymap.set('n', '<leader>w', vim.diagnostic.setloclist, key_opts)
 vim.cmd([[autocmd FileType rust nnoremap <buffer> <silent> <leader>[ :silent :!cargo fmt<CR>]])
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -51,7 +54,7 @@ local servers = {
     settings = {},
   },
   typescript = {
-    servers = { "tsserver", "eslint" },
+    servers = { "ts_ls" },
     settings = {},
   },
   rust = {
@@ -82,14 +85,6 @@ local servers = {
         {
           fileMatch = {'tsconfig.json', 'tsconfig.*.json'},
           url = 'http://json.schemastore.org/tsconfig'
-        },
-        {
-          fileMatch = {'.eslintrc.json', '.eslintrc'},
-          url = 'http://json.schemastore.org/eslintrc'
-        },
-        {
-          fileMatch = {'.prettierrc', '.prettierrc.json', 'prettier.config.json'},
-          url = 'http://json.schemastore.org/prettierrc'
         },
         {
           fileMatch = {'.babelrc.json', '.babelrc', 'babel.config.json'},
@@ -200,20 +195,6 @@ require("lazy").setup({
       })
     end
   },
-
-  { 
-    "prettier/vim-prettier", 
-    ft = { "typescript", "markdown", "json", "yaml", "javascript" },
-    config = function() 
-      vim.g["prettier#autoformat"] = 0
-      vim.g["prettier#autoformat_require_pragma"] = 0
-      vim.g["prettier#quickfix_enabled"] = 0
-      vim.g["prettier#exec_cmd_async"] = 1
-      vim.keymap.set("n", "<leader>[", "<cmd>PrettierAsync<CR>", key_opts)
-      vim.keymap.set("n", "<leader>]", "<cmd>eslintFixAll<CR>", key_opts)
-    end
-  },
-
 
   {
     "nvim-telescope/telescope.nvim",

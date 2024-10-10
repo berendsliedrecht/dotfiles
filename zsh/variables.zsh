@@ -5,3 +5,5 @@ export DOCKER_HOST="unix:///var/run/docker.sock"
 export XDG_CONFIG_HOME="$HOME/.config"
 export FZF_DEFAULT_OPTS='--color=bw'
 export VOLTA_HOME="$HOME/.volta"
+export N_PREFIX="$HOME/.n"
+export HOMEBREW_NO_AUTO_UPDATE=1
