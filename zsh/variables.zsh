@@ -1,6 +1,8 @@
 export EDITOR="nvim"
-export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
-export JAVA_HOME="/opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk/Contents/Home"
+export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+export ANDROID_HOME=$ANDROID_SDK_ROOT
+export ANDROID_AVD_HOME="$XDG_CONFIG_HOME/.android/avd"
+export JAVA_HOME="/usr/lib/jvm/default"
 export DOCKER_HOST="unix:///var/run/docker.sock"
 export XDG_CONFIG_HOME="$HOME/.config"
 export FZF_DEFAULT_OPTS='--color=bw'

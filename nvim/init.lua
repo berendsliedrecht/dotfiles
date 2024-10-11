@@ -1,4 +1,5 @@
 vim.cmd("hi Pmenu ctermfg=NONE ctermbg=NONE cterm=NONE")
+vim.cmd("colorscheme vim")
 
 vim.g.mapleader   = " "
 vim.o.undofile    = true
@@ -17,7 +18,7 @@ vim.o.backspace   = "indent,eol,start"
 vim.o.confirm     = true
 vim.o.splitright  = true
 vim.o.splitbelow  = true
-vim.o.clipboard   = "unnamed"
+vim.o.clipboard   = "unnamedplus"
 vim.o.title       = true
 vim.o.number      = true
 vim.o.signcolumn  = "number"
@@ -257,6 +258,6 @@ require("lazy").setup({
       telescope.load_extension("file_browser")
     end
   }
-}, { install = { colorscheme = { "default" } }})
+}, { install = { colorscheme = { "vim" } }})
 
 

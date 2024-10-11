@@ -1,9 +1,5 @@
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-ID=$(xinput -list | grep -i "At Translated Set 2 Keyboard" | awk '{ print $7 }' | cut -c 4-)
-setxkbmap -device ${ID} -option ctrl:nocaps
-setxkbmap -device ${ID} -option altwin:swap_lalt_lwin
-
-thinkpad_status_bar &
-dunst &
+exec dwm-statusbar &
+exec dunst &
 exec dwm

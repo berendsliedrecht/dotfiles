@@ -10,6 +10,6 @@ decorations = "Buttonless"
 option_as_alt = "Both"
 
 [font]
-normal.family = "MesloLGS Nerd Font Mono"
+normal.family = "Hack Nerd Font Mono"
 
 size = 18
