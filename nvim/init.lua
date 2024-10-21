@@ -103,6 +103,7 @@ require("lazy").setup({
       "hrsh7th/cmp-nvim-lsp"
     },
     config = function() 
+      capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
       for k, lsp in pairs(servers) do
         if next(lsp) == nil then break end
         local settings = {}
@@ -113,7 +114,6 @@ require("lazy").setup({
         end
         for _, server in ipairs(lsp.servers) do
           require("lspconfig")[server].setup({
-            capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
             on_attach = function(client, bufnr)
               local bufopts = { noremap=true, silent=true, buffer=bufnr }
               vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
@@ -128,6 +128,7 @@ require("lazy").setup({
             flags = {
               debounce_text_changes = 150 
             },
+	    capabilities = capabilities,
             handlers = {
               ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
               ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" }),

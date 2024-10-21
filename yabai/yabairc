@@ -14,11 +14,8 @@ yabai -m config focus_follows_mouse autofocus
 # Disable Shadows
 yabai -m config window_shadow off
 
-# Account for status bar
-yabai -m config external_bar main:20:0
-
 # Set padding
-yabai -m config top_padding    10
+yabai -m config top_padding    30
 yabai -m config bottom_padding 10
 yabai -m config left_padding   10
 yabai -m config right_padding  10
