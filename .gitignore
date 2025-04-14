@@ -9,3 +9,5 @@
 !nvim/**
 !bin/**
 !sketchybar/**
+
+nvim/spell

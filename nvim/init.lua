@@ -1,5 +1,4 @@
 vim.cmd("hi Pmenu ctermfg=NONE ctermbg=NONE cterm=NONE")
-vim.cmd("colorscheme vim")
 
 vim.g.mapleader   = " "
 vim.o.undofile    = true
@@ -97,6 +96,12 @@ local servers = {
 }
 
 require("lazy").setup({
+  {
+    'chomosuke/typst-preview.nvim',
+    ft = 'typst',
+    version = '1.*',
+    opts = {},
+  },
   { 
     "neovim/nvim-lspconfig", 
     dependencies = {
@@ -259,6 +264,6 @@ require("lazy").setup({
       telescope.load_extension("file_browser")
     end
   }
-}, { install = { colorscheme = { "vim" } }})
+}, { install = { colorscheme = { "default" } }})
 
 

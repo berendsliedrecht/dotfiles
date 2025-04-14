@@ -8,3 +8,4 @@ export PATH=$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin
 export PATH=$PATH:$HOME/Android/Sdk/platform-tools
 export PATH=$PATH:$HOME/.rbenv/shims
 export PATH=$PATH:$HOME/.rbenv/bin
+export PATH=$PATH:/opt/homebrew/opt/openjdk@21/bin

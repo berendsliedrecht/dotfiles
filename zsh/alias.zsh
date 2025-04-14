@@ -9,6 +9,7 @@ HYPERLEDGER="$WORK/hyperledger"
 ESSIF="$WORK/essif"
 IDCRYPT="$WORK/idcrypt"
 NOTEBOOK="$HOME/Notebook"
+OPENWALLET_FOUNDATION="$WORK/openwallet-foundation"
 
 # Directories
 alias tmp="cd $TMP"
@@ -20,6 +21,7 @@ alias esf="cd $ESSIF"
 alias conf="cd $CONFIG"
 alias idc="cd $IDCRYPT"
 alias notes="cd $NOTEBOOK"
+alias owf="cd $OPENWALLET_FOUNDATION"
 
 # Editting
 alias v="vim"
