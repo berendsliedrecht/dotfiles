@@ -1,7 +1,7 @@
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
 
-sketchybar --bar padding_left=0 color=0xff292929 sticky=on
+sketchybar --bar color=0xff8e8e8e sticky=on notch_display_height=38 padding_left=5
 
 sketchybar --default updates=when_shown                                   \
                      drawing=on                                           \
@@ -22,7 +22,7 @@ do
                               icon.padding_right=10                       \
                               background.color=0xff5451FF                 \
                               background.drawing=off                      \
-                              background.height=27                        \
+                              background.height=38                        \
                               label.drawing=off                           \
                               script="$PLUGIN_DIR/space.sh"               \
                               click_script="yabai -m space --focus $sid"
@@ -38,6 +38,9 @@ sketchybar --add item clock right                                         \
                                                                           \
            --add item battery right                                       \
            --set battery script="$PLUGIN_DIR/battery.sh"                  \
-                         update_freq=120                                  \
+                         update_freq=60                                   \
                          click_script="$PLUGIN_DIR/sleep.sh"              \
            --subscribe battery system_woke power_source_change
+
+sketchybar --trigger volume_change
+sketchybar --trigger power_source_change

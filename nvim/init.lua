@@ -49,6 +49,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local servers = {
+  latex = {
+    servers = { "texlab" },
+    settings = {}
+  },
   python = {
     servers = { "pyright" },
     settings = {},
@@ -102,6 +106,14 @@ require("lazy").setup({
     version = '1.*',
     opts = {},
   },
+  {
+    "lervag/vimtex",
+    lazy = false,
+    init = function()
+      vim.g.vimtex_view_method = "skim"
+      -- vim.g.vimtex_quickfix_open_on_warning = 0
+    end
+  },
   { 
     "neovim/nvim-lspconfig", 
     dependencies = {
@@ -144,6 +156,8 @@ require("lazy").setup({
       end
     end
   },
+
+  { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
 
   {
     "hrsh7th/nvim-cmp",
@@ -221,6 +235,12 @@ require("lazy").setup({
         }
       })
 
+      telescope_theme_long = require('telescope.themes').get_ivy({
+        layout_config = {
+          height = 50
+        }
+      })
+
       project_files = function()
           local _, ret, _ = require("telescope.utils")
             .get_os_command_output({ 'git', 'rev-parse', '--is-inside-work-tree' }) 
@@ -233,7 +253,9 @@ require("lazy").setup({
 
       vim.keymap.set("n", "<leader><leader>", ":lua project_files()<CR>", key_opts)
       vim.keymap.set("n", "<leader>p", ":lua require('telescope').extensions.file_browser.file_browser(telescope_theme)<CR>", key_opts)
+      vim.keymap.set("n", "<leader>P", ":lua require('telescope').extensions.file_browser.file_browser(telescope_theme_long)<CR>", key_opts)
       vim.keymap.set("n", "<leader>/", ":lua require('telescope.builtin').live_grep(telescope_theme)<CR>", key_opts)
+      vim.keymap.set("n", "<leader>?", ":lua require('telescope.builtin').live_grep(telescope_theme_long)<CR>", key_opts)
       vim.keymap.set("n", "<leader>b", ":lua require('telescope.builtin').buffers(telescope_theme)<CR>")
 
       telescope.setup({
@@ -264,6 +286,6 @@ require("lazy").setup({
       telescope.load_extension("file_browser")
     end
   }
-}, { install = { colorscheme = { "default" } }})
+}, { install = { colorscheme = { "vim" } }})
 
 

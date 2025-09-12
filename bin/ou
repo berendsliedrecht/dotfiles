@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+xcrun simctl openurl booted $1

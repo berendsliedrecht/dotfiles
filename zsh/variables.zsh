@@ -6,6 +6,6 @@ export JAVA_HOME="/opt/homebrew/Cellar/openjdk@21/21.0.6/libexec/openjdk.jdk/Con
 export DOCKER_HOST="unix:///var/run/docker.sock"
 export XDG_CONFIG_HOME="$HOME/.config"
 export FZF_DEFAULT_OPTS='--color=bw'
-export N_PREFIX="$HOME/.n"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export PNPM_HOME="/Users/beri/Library/pnpm"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
