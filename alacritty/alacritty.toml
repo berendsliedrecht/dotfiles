@@ -1,11 +1,31 @@
-[env]
-TERM = "xterm-256color"
-
 [window]
-padding.x = 3
-padding.y = 10
+padding.y = 3
 decorations = "Buttonless"
 
 [font]
 normal.family = "Hack Nerd Font Mono"
 size = 18
+
+[colors.primary]
+foreground = "#ffffff"
+background = "#000000"
+
+[colors.normal]
+black = "#000000"
+red = "#ff628c"
+green = "#3ad900"
+yellow = "#ffc600"
+blue = "#0088ff"
+magenta = "#fb94ff"
+cyan = "#60dadd"
+white = "#ffffff"
+
+[colors.bright]
+black = "#0050a4"
+red = "#ff628c"
+green = "#3ad900"
+yellow = "#ffc600"
+blue = "#0088ff"
+magenta = "#fb94ff"
+cyan = "#60dadd"
+white = "#ffffff"

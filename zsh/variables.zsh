@@ -1,3 +1,4 @@
+export TERM="screen-256color"
 export EDITOR="nvim"
 export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
 export ANDROID_HOME=$ANDROID_SDK_ROOT

@@ -1,7 +1,7 @@
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
 
-sketchybar --bar color=0xff8e8e8e sticky=on notch_display_height=38 padding_left=5
+sketchybar --bar color=0xff14161B sticky=on notch_display_height=32
 
 sketchybar --default updates=when_shown                                   \
                      drawing=on                                           \

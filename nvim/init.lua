@@ -1,36 +1,36 @@
 vim.cmd("hi Pmenu ctermfg=NONE ctermbg=NONE cterm=NONE")
 
-vim.g.mapleader   = " "
-vim.o.undofile    = true
-vim.o.laststatus  = 3
-vim.o.mouse       = "a"
-vim.o.shiftwidth  = 2
-vim.o.shiftround  = true
-vim.o.tabstop     = 2
-vim.o.expandtab   = true
-vim.o.autoread    = true
-vim.o.smartcase   = true
-vim.o.smartindent = true
-vim.o.linebreak   = true
-vim.o.scrolloff   = 7
-vim.o.backspace   = "indent,eol,start"
-vim.o.confirm     = true
-vim.o.splitright  = true
-vim.o.splitbelow  = true
-vim.o.clipboard   = "unnamedplus"
-vim.o.title       = true
-vim.o.number      = true
-vim.o.signcolumn  = "number"
-vim.o.swapfile    = false
-vim.o.writebackup = false
+vim.g.mapleader     = " "
+vim.o.undofile      = true
+vim.o.laststatus    = 3
+vim.o.mouse         = "a"
+vim.o.shiftwidth    = 2
+vim.o.shiftround    = true
+vim.o.tabstop       = 2
+vim.o.expandtab     = true
+vim.o.autoread      = true
+vim.o.smartcase     = true
+vim.o.smartindent   = true
+vim.o.linebreak     = true
+vim.o.scrolloff     = 7
+vim.o.backspace     = "indent,eol,start"
+vim.o.confirm       = true
+vim.o.splitright    = true
+vim.o.splitbelow    = true
+vim.o.clipboard     = "unnamedplus"
+vim.o.title         = true
+vim.o.number        = true
+vim.o.signcolumn    = "number"
+vim.o.swapfile      = false
+vim.o.writebackup   = false
+vim.o.termguicolors = false
+vim.opt.fillchars:append({ eob = " " })
 
 local key_opts = { noremap = true, silent = true } 
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", key_opts )
 vim.keymap.set('n', '<C-t>', ":vs | :term<CR>", key_opts)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, key_opts)
 vim.keymap.set('n', '<leader>w', vim.diagnostic.setloclist, key_opts)
-
-vim.cmd([[autocmd FileType rust nnoremap <buffer> <silent> <leader>[ :silent :!cargo fmt<CR>]])
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -52,10 +52,6 @@ local servers = {
   latex = {
     servers = { "texlab" },
     settings = {}
-  },
-  python = {
-    servers = { "pyright" },
-    settings = {},
   },
   typescript = {
     servers = { "ts_ls" },
@@ -286,6 +282,4 @@ require("lazy").setup({
       telescope.load_extension("file_browser")
     end
   }
-}, { install = { colorscheme = { "vim" } }})
-
-
+}, { install = { }})
