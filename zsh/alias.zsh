@@ -10,7 +10,7 @@ HYPERLEDGER="$WORK/hyperledger"
 ESSIF="$WORK/essif"
 IDCRYPT="$WORK/idcrypt"
 NOTEBOOK="$HOME/notes"
-OPENWALLET_FOUNDATION="$WORK/openwallet-foundation"
+OPENWALLET="$WORK/openwallet-foundation"
 
 # Directories
 alias tmp="cd $TMP"
@@ -19,11 +19,12 @@ alias per="cd $PERSONAL"
 alias sch="cd $SCHOOL"
 alias animo="cd $ANIMO"
 alias hype="cd $HYPERLEDGER"
+alias owf="cd $OPENWALLET"
 alias esf="cd $ESSIF"
 alias conf="cd $CONFIG"
 alias idc="cd $IDCRYPT"
 alias notes="cd $NOTEBOOK"
-alias owf="cd $OPENWALLET_FOUNDATION"
+alias owf="cd $OPENWALLET"
 
 # Editting
 alias v="vim"
@@ -42,6 +43,3 @@ alias rg="rg -S."
 alias rebuild="make && sudo make install"
 alias vrc="vim ~/.vimrc"
 alias ngrok-demo="ngrok http --region=eu --hostname=gbs.eu.ngrok.io 3001"
-
-# containers
-alias lima-ubuntu="limactl shell ubuntu"

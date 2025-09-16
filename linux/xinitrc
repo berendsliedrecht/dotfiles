@@ -1,5 +1,6 @@
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+nohup flameshot &
 exec dwm-statusbar &
 exec dunst &
 exec dwm
