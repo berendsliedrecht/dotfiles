@@ -54,7 +54,11 @@ local servers = {
     settings = {}
   },
   typescript = {
-    servers = { "ts_ls" },
+    servers = { "vtsls" },
+    settings = {},
+  },
+  html = {
+    servers = { "tailwindcss" },
     settings = {},
   },
   rust = {
@@ -110,7 +114,8 @@ require("lazy").setup({
       -- vim.g.vimtex_quickfix_open_on_warning = 0
     end
   },
-  { 
+
+{ 
     "neovim/nvim-lspconfig", 
     dependencies = {
       "hrsh7th/cmp-nvim-lsp"
@@ -126,7 +131,7 @@ require("lazy").setup({
 	        settings[k] = servers[k].settings
         end
         for _, server in ipairs(lsp.servers) do
-          require("lspconfig")[server].setup({
+          vim.lsp.config[server] = {
             on_attach = function(client, bufnr)
               local bufopts = { noremap=true, silent=true, buffer=bufnr }
               vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
@@ -141,13 +146,14 @@ require("lazy").setup({
             flags = {
               debounce_text_changes = 150 
             },
-	    capabilities = capabilities,
+            capabilities = capabilities,
             handlers = {
               ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
               ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" }),
             },
             settings = settings
-          })
+          }
+          vim.lsp.enable(server)
         end
       end
     end

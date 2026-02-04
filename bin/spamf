@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <string> <number>" >&2
+    exit 1
+fi
+
+string="$1"
+count="$2"
+
+# Output the string the specified number of times without newlines
+for ((i=0; i<count; i++)); do
+    printf "%s" "$string"
+done

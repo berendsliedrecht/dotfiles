@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+PID=`lsof -i :$1 | rg TCP -m 1 | awk '{print $2}'`
+
+if [[ -z $PID ]]; then
+  echo "No process on" $1
+  exit 0
+fi
+
+kill -9 $PID
+

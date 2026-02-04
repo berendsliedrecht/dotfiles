@@ -28,3 +28,6 @@ blue = "#0088ff"
 magenta = "#fb94ff"
 cyan = "#60dadd"
 white = "#ffffff"
+
+[colors.dim]
+white = "#000000"
