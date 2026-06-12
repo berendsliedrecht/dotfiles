@@ -1,1 +1,18 @@
 source $HOME/.config/zsh/sources.zsh
+
+export PATH="/Users/beri/.local/state/fnm_multishells/65210_1761910811980/bin":$PATH
+export FNM_MULTISHELL_PATH="/Users/beri/.local/state/fnm_multishells/65210_1761910811980"
+export FNM_VERSION_FILE_STRATEGY="local"
+export FNM_DIR="/Users/beri/.local/share/fnm"
+export FNM_LOGLEVEL="info"
+export FNM_NODE_DIST_MIRROR="https://nodejs.org/dist"
+export FNM_COREPACK_ENABLED="false"
+export FNM_RESOLVE_ENGINES="true"
+export FNM_ARCH="arm64"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH=$PATH:$HOME/.maestro/bin
+
+. "$HOME/.local/bin/env"

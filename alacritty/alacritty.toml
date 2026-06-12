@@ -31,3 +31,8 @@ white = "#ffffff"
 
 [colors.dim]
 white = "#000000"
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"

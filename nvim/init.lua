@@ -1,4 +1,5 @@
 vim.cmd("hi Pmenu ctermfg=NONE ctermbg=NONE cterm=NONE")
+vim.cmd.colorscheme("elflord")
 
 vim.g.mapleader     = " "
 vim.o.undofile      = true
@@ -29,6 +30,8 @@ vim.opt.fillchars:append({ eob = " " })
 local key_opts = { noremap = true, silent = true } 
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", key_opts )
 vim.keymap.set('n', '<C-t>', ":vs | :term<CR>", key_opts)
+vim.keymap.set('n', '<C-y>', ":CodeCompanionChat Toggle<CR>", key_opts)
+vim.keymap.set('v', '<C-a>', ":CodeCompanionChat Add<CR>", key_opts)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, key_opts)
 vim.keymap.set('n', '<leader>w', vim.diagnostic.setloclist, key_opts)
 
@@ -114,8 +117,7 @@ require("lazy").setup({
       -- vim.g.vimtex_quickfix_open_on_warning = 0
     end
   },
-
-{ 
+  { 
     "neovim/nvim-lspconfig", 
     dependencies = {
       "hrsh7th/cmp-nvim-lsp"
@@ -134,6 +136,7 @@ require("lazy").setup({
           vim.lsp.config[server] = {
             on_attach = function(client, bufnr)
               local bufopts = { noremap=true, silent=true, buffer=bufnr }
+              local bufopts_with_border = { noremap=true, silent=true, buffer=bufnr, border = "line" }
               vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
               vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
               vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -147,10 +150,6 @@ require("lazy").setup({
               debounce_text_changes = 150 
             },
             capabilities = capabilities,
-            handlers = {
-              ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
-              ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" }),
-            },
             settings = settings
           }
           vim.lsp.enable(server)
@@ -200,23 +199,12 @@ require("lazy").setup({
   
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     build = ":TSUpdate",
-    config = function()
-      local keyset={}
-      local n=0
-      for k,v in pairs(servers) do
-        n = n + 1
-        keyset[n] = k
-      end
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = keyset,
-        auto_install = false,
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-      })
-    end
+    opts = {
+      indent = { enable = true },
+      highlight = { enable = true },
+    }
   },
 
   {
@@ -287,5 +275,31 @@ require("lazy").setup({
       telescope.load_extension("fzf")
       telescope.load_extension("file_browser")
     end
-  }
+  },
+{
+  "coder/claudecode.nvim",
+  dependencies = { "folke/snacks.nvim" },
+  config = true,
+  cmd = {
+    "ClaudeCode",
+    "ClaudeCodeFocus",
+    "ClaudeCodeSelectModel",
+    "ClaudeCodeAdd",
+    "ClaudeCodeSend",
+    "ClaudeCodeTreeAdd",
+    "ClaudeCodeStatus",
+    "ClaudeCodeStart",
+    "ClaudeCodeStop",
+    "ClaudeCodeOpen",
+    "ClaudeCodeClose",
+    "ClaudeCodeDiffAccept",
+    "ClaudeCodeDiffDeny",
+    "ClaudeCodeCloseAllDiffs",
+  },
+  keys = {
+    { "<leader>y", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+    { "<leader>da", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+    { "<leader>dd", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+  },
+}
 }, { install = { }})
