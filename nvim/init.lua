@@ -1,5 +1,6 @@
 vim.cmd("hi Pmenu ctermfg=NONE ctermbg=NONE cterm=NONE")
 vim.cmd.colorscheme("elflord")
+vim.cmd("hi NormalFloat ctermbg=NONE ctermfg=NONE")
 
 vim.g.mapleader     = " "
 vim.o.undofile      = true

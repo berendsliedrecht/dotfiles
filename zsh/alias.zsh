@@ -24,7 +24,6 @@ alias esf="cd $ESSIF"
 alias conf="cd $CONFIG"
 alias idc="cd $IDCRYPT"
 alias notes="cd $NOTEBOOK"
-alias owf="cd $OPENWALLET"
 
 # Editting
 alias v="vim"

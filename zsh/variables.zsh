@@ -1,12 +1,15 @@
-export TERM="screen-256color"
 export EDITOR="nvim"
-export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
-export ANDROID_HOME=$ANDROID_SDK_ROOT
-export ANDROID_AVD_HOME="$XDG_CONFIG_HOME/.android/avd"
-export JAVA_HOME="/opt/homebrew/Cellar/openjdk@21/21.0.10/libexec/openjdk.jdk/Contents/Home"
-export DOCKER_HOST="unix:///var/run/docker.sock"
 export XDG_CONFIG_HOME="$HOME/.config"
+export BUN_INSTALL="$HOME/.bun"
+export ANDROID_AVD_HOME="$XDG_CONFIG_HOME/.android/avd"
+export DOCKER_HOST="unix:///var/run/docker.sock"
 export FZF_DEFAULT_OPTS='--color=bw'
-export HOMEBREW_NO_AUTO_UPDATE=1
-export PNPM_HOME="/Users/beri/Library/pnpm"
-export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
+
+case "$(uname -s)" in
+  Darwin) source ~/.config/zsh/variables.macos.zsh ;;
+  Linux)  source ~/.config/zsh/variables.linux.zsh ;;
+esac
+
+# Depends on ANDROID_SDK_ROOT, which the OS-specific files set above.
+export ANDROID_HOME="$ANDROID_SDK_ROOT"
+
