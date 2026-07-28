@@ -3,9 +3,9 @@
 !alacritty/**
 !linux/**
 !zsh/**
+!git/**
 !yabai/**
 !skhd/**
-!spacebar/**
 !nvim/**
 !bin/**
 !sketchybar/**
