@@ -1,6 +1,7 @@
 vim.cmd("hi Pmenu ctermfg=NONE ctermbg=NONE cterm=NONE")
 vim.cmd.colorscheme("elflord")
 vim.cmd("hi NormalFloat ctermbg=NONE ctermfg=NONE")
+vim.cmd("hi FloatBorder ctermbg=NONE ctermfg=NONE")
 
 vim.g.mapleader     = " "
 vim.o.undofile      = true
@@ -26,15 +27,36 @@ vim.o.signcolumn    = "number"
 vim.o.swapfile      = false
 vim.o.writebackup   = false
 vim.o.termguicolors = false
+vim.o.completeopt   = "menu,menuone,noinsert,popup"
+vim.o.winborder     = "rounded"
 vim.opt.fillchars:append({ eob = " " })
 
-local key_opts = { noremap = true, silent = true } 
-vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", key_opts )
-vim.keymap.set('n', '<C-t>', ":vs | :term<CR>", key_opts)
-vim.keymap.set('n', '<C-y>', ":CodeCompanionChat Toggle<CR>", key_opts)
-vim.keymap.set('v', '<C-a>', ":CodeCompanionChat Add<CR>", key_opts)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, key_opts)
-vim.keymap.set('n', '<leader>w', vim.diagnostic.setloclist, key_opts)
+local key_opts = { noremap = true, silent = true }
+vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", key_opts)
+vim.keymap.set("n", "<C-t>", ":vs | :term<CR>", key_opts)
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, key_opts)
+vim.keymap.set("n", "<leader>w", vim.diagnostic.setloclist, key_opts)
+vim.keymap.set("i", "<CR>", function()
+  return vim.fn.pumvisible() == 1 and "<C-y>" or "<CR>"
+end, { expr = true })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(ev)
+    local bufopts = { noremap = true, silent = true, buffer = ev.buf }
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, bufopts)
+    vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, bufopts)
+    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+    if client:supports_method("textDocument/completion") then
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = false })
+      vim.keymap.set("i", "<C-Space>", vim.lsp.completion.get, bufopts)
+    end
+  end,
+})
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -52,255 +74,105 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local servers = {
-  latex = {
-    servers = { "texlab" },
-    settings = {}
-  },
-  typescript = {
-    servers = { "vtsls" },
-    settings = {},
-  },
-  html = {
-    servers = { "tailwindcss" },
-    settings = {},
-  },
-  rust = {
-    settingsKey = "rust-analyzer",
-    servers = { "rust_analyzer" },
-    settings = {}
-  },
-  yaml = {
-    servers = { "yamlls" },
-    settings = {
-      keyOrdering = false,
-      schemas = {
-        {
-          fileMatch = { '.github/**/*.yml', '.github/**/*.yaml' },
-          url = "https://json.schemastore.org/github-workflow.json",
-        }
-      }
-    }
-  },
-  json = {
-    servers = { "jsonls" },
-    settings = {
-      schemas = {
-        {
-          fileMatch = { 'package.json' },
-          url = 'https://json.schemastore.org/package.json',
-        },
-        {
-          fileMatch = {'tsconfig.json', 'tsconfig.*.json'},
-          url = 'http://json.schemastore.org/tsconfig'
-        },
-        {
-          fileMatch = {'.babelrc.json', '.babelrc', 'babel.config.json'},
-          url = 'http://json.schemastore.org/lerna'
-        },
-      }
-    }
-  }
-}
-
 require("lazy").setup({
   {
-    'chomosuke/typst-preview.nvim',
-    ft = 'typst',
-    version = '1.*',
-    opts = {},
-  },
-  {
     "lervag/vimtex",
+    version = "*", -- master requires nvim 0.12.4+
     lazy = false,
     init = function()
-      vim.g.vimtex_view_method = "skim"
-      -- vim.g.vimtex_quickfix_open_on_warning = 0
-    end
+      vim.g.vimtex_view_method = vim.fn.has("mac") == 1 and "skim" or "zathura"
+    end,
   },
-  { 
-    "neovim/nvim-lspconfig", 
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp"
-    },
-    config = function() 
-      capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-      for k, lsp in pairs(servers) do
-        if next(lsp) == nil then break end
-        local settings = {}
-        if lsp.settingsKey then 
-	        settings[lsp.settingsKey] = lsp.settings
-        else 
-	        settings[k] = servers[k].settings
-        end
-        for _, server in ipairs(lsp.servers) do
-          vim.lsp.config[server] = {
-            on_attach = function(client, bufnr)
-              local bufopts = { noremap=true, silent=true, buffer=bufnr }
-              local bufopts_with_border = { noremap=true, silent=true, buffer=bufnr, border = "line" }
-              vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-              vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-              vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-              vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-              vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-              vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, bufopts)
-              vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
-              vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-            end,
-            flags = {
-              debounce_text_changes = 150 
-            },
-            capabilities = capabilities,
-            settings = settings
-          }
-          vim.lsp.enable(server)
-        end
-      end
-    end
-  },
-
-  { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
 
   {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "saadparwaiz1/cmp_luasnip",
-      "L3MON4D3/LuaSnip",
-      "hrsh7th/cmp-path",
-    },
+    "neovim/nvim-lspconfig",
     config = function()
-      local cmp = require("cmp")
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<CR>"] = cmp.mapping.confirm { select = true },
-        }),
-        sources = {
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "path" },
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-        completion = { autocomplete = false },
+      vim.lsp.config("jsonls", {
         settings = {
-          yaml = servers.yaml.settings,
-          json = servers.json.settings,
-        }
+          json = {
+            validate = { enable = true },
+            schemas = {
+              { fileMatch = { "package.json" }, url = "https://www.schemastore.org/package.json" },
+              { fileMatch = { "tsconfig.json", "tsconfig.*.json" }, url = "https://www.schemastore.org/tsconfig" },
+              { fileMatch = { "biome.json", "biome.jsonc" }, url = "https://biomejs.dev/schemas/latest/schema.json" },
+            },
+          },
+        },
+      })
+      vim.lsp.enable("biome") -- resolved per-project from node_modules, nothing to install
+      local servers = {
+        vtsls = { "vtsls", "pnpm add -g @vtsls/language-server" },
+        jsonls = { "vscode-json-language-server", "pnpm add -g vscode-langservers-extracted" },
+        tailwindcss = { "tailwindcss-language-server", "pnpm add -g @tailwindcss/language-server" },
+        rust_analyzer = { "rust-analyzer", "rustup component add rust-analyzer" },
+        texlab = { "texlab", "cargo install --locked texlab" },
+      }
+      for name, server in pairs(servers) do
+        local bin, install = server[1], server[2]
+        if vim.fn.executable(bin) == 1 then
+          vim.lsp.enable(name)
+        else
+          local prompted = false -- "once" is per-pattern, this is per-server
+          vim.api.nvim_create_autocmd("FileType", {
+            pattern = vim.lsp.config[name].filetypes,
+            desc = "lsp-install-prompt:" .. name,
+            callback = function()
+              if prompted or #vim.api.nvim_list_uis() == 0 then return end -- ask once; never block headless
+              prompted = true
+              if vim.fn.confirm(("%s is not installed. Run `%s`?"):format(bin, install), "&Yes\n&No") ~= 1 then return end
+              vim.notify("Installing " .. bin .. "...")
+              vim.system(vim.split(install, " "), {}, vim.schedule_wrap(function(out)
+                if out.code == 0 then
+                  vim.lsp.enable(name)
+                  vim.notify(bin .. " installed")
+                else
+                  vim.notify(bin .. " install failed:\n" .. (out.stderr or ""), vim.log.levels.ERROR)
+                end
+              end))
+            end,
+          })
+        end
+      end
+    end,
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
+    build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter").install({ "typescript", "tsx", "javascript", "rust", "json", "toml", "yaml" })
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact", "rust", "json", "jsonc", "toml", "yaml" },
+        callback = function() vim.treesitter.start() end,
       })
     end,
   },
-  
+
   {
-    "nvim-treesitter/nvim-treesitter",
+    "folke/snacks.nvim",
     lazy = false,
-    build = ":TSUpdate",
     opts = {
-      indent = { enable = true },
-      highlight = { enable = true },
-    }
+      picker = { layout = { preset = "ivy" } },
+    },
+    keys = {
+      { "<leader><leader>", function() Snacks.picker.files() end, desc = "Find files" },
+      { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>b", function() Snacks.picker.buffers() end, desc = "Buffers" },
+      { "<leader>p", function() Snacks.picker.explorer() end, desc = "Explorer" },
+    },
   },
 
   {
-    "nvim-telescope/telescope.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-file-browser.nvim",
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make"
-      },
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    config = true,
+    cmd = {
+      "ClaudeCode",
     },
-    config = function()
-      telescope = require("telescope")
-      telescope_theme = require('telescope.themes').get_ivy({
-        layout_config = {
-          height = 17
-        }
-      })
-
-      telescope_theme_long = require('telescope.themes').get_ivy({
-        layout_config = {
-          height = 50
-        }
-      })
-
-      project_files = function()
-          local _, ret, _ = require("telescope.utils")
-            .get_os_command_output({ 'git', 'rev-parse', '--is-inside-work-tree' }) 
-          if ret == 0 then 
-              require('telescope.builtin').git_files(telescope_theme) 
-          else 
-              require('telescope.builtin').find_files(telescope_theme) 
-          end 
-      end
-
-      vim.keymap.set("n", "<leader><leader>", ":lua project_files()<CR>", key_opts)
-      vim.keymap.set("n", "<leader>p", ":lua require('telescope').extensions.file_browser.file_browser(telescope_theme)<CR>", key_opts)
-      vim.keymap.set("n", "<leader>P", ":lua require('telescope').extensions.file_browser.file_browser(telescope_theme_long)<CR>", key_opts)
-      vim.keymap.set("n", "<leader>/", ":lua require('telescope.builtin').live_grep(telescope_theme)<CR>", key_opts)
-      vim.keymap.set("n", "<leader>?", ":lua require('telescope.builtin').live_grep(telescope_theme_long)<CR>", key_opts)
-      vim.keymap.set("n", "<leader>b", ":lua require('telescope.builtin').buffers(telescope_theme)<CR>")
-
-      telescope.setup({
-        defaults = {
-          file_ignore_patterns = { "node_modules" },
-        },
-        pickers = {
-          git_files = {
-            show_untracked = true
-          },
-        },
-        extensions = {
-          fzf = {
-            fuzzy = true,
-            override_generic_sorter = true,
-            override_file_sorter = true,
-            case_mode = "smart_case",
-          },
-          file_browser = {
-            theme = "ivy",
-            previewer = false,
-            initial_mode = "normal",
-          },
-        },
-      })
-
-      telescope.load_extension("fzf")
-      telescope.load_extension("file_browser")
-    end
+    keys = {
+      { "<leader>y", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+    },
   },
-{
-  "coder/claudecode.nvim",
-  dependencies = { "folke/snacks.nvim" },
-  config = true,
-  cmd = {
-    "ClaudeCode",
-    "ClaudeCodeFocus",
-    "ClaudeCodeSelectModel",
-    "ClaudeCodeAdd",
-    "ClaudeCodeSend",
-    "ClaudeCodeTreeAdd",
-    "ClaudeCodeStatus",
-    "ClaudeCodeStart",
-    "ClaudeCodeStop",
-    "ClaudeCodeOpen",
-    "ClaudeCodeClose",
-    "ClaudeCodeDiffAccept",
-    "ClaudeCodeDiffDeny",
-    "ClaudeCodeCloseAllDiffs",
-  },
-  keys = {
-    { "<leader>y", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-    { "<leader>da", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-    { "<leader>dd", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
-  },
-}
-}, { install = { }})
+})
