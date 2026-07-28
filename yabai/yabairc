@@ -23,3 +23,8 @@ yabai -m config bottom_padding 10
 yabai -m config left_padding   10
 yabai -m config right_padding  10
 yabai -m config window_gap     10
+
+# Move windows with alt + left-drag, swap tiled windows on drop
+yabai -m config mouse_modifier alt
+yabai -m config mouse_action1 move
+yabai -m config mouse_drop_action swap
